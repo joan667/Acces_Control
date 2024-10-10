@@ -8,7 +8,6 @@ import org.json.JSONObject;
 public class Door {
   private final String id;
   private boolean closed; // physically
-
   private DoorState doorState; // Estat de la porta (locked, unlocked de moment)
 
   public void setDoorState(DoorState ds)
@@ -16,12 +15,18 @@ public class Door {
     this.doorState = ds;
   }
 
+  public void setClosed(boolean closed) {
+    this.closed = closed;
+  }
+
+
+
   public Door(String id) {
     this.id = id;
-    closed = true;
+    this.closed = true;
 
     //declarem el door state com a unlocked primer
-    doorState = new UnlockedDoor(this);
+    this.doorState = new UnlockedState(this);
 
   }
 
@@ -40,28 +45,30 @@ public class Door {
   private void doAction(String action) {
     switch (action) {
       case Actions.OPEN:
-        if (closed) {
+        /*if (closed) {
           closed = false;
         } else {
           System.out.println("Can't open door " + id + " because it's already open");
-        }
+        }*/
+        doorState.open();
         break;
       case Actions.CLOSE:
-        if (closed) {
+        /*if (closed) {
           System.out.println("Can't close door " + id + " because it's already closed");
         } else {
           closed = true;
-        }
+        }*/
+        doorState.close();
         break;
       case Actions.LOCK:
         // TODO
         doorState.lock();
-
+        break;
         // fall through
       case Actions.UNLOCK:
         // TODO
         doorState.unlock();
-
+        break;
         // fall through
       case Actions.UNLOCK_SHORTLY:
         // TODO
@@ -82,7 +89,8 @@ public class Door {
   }
 
   public String getStateName() {
-    return "unlocked";
+
+    return doorState.getStateName();
   }
 
   @Override
