@@ -10,7 +10,7 @@ public class LockedState extends  DoorState{
 
   @Override
   public void open() {
-    System.out.println("The door is locked and cannot be opened.");
+    System.out.println("The door is locked and cannot be opened. Unlock it first");
   }
 
   @Override
@@ -40,6 +40,6 @@ public class LockedState extends  DoorState{
   }
 
   public String getStateName() {
-    return "locked";
+    return States.LOCKED;
   }
 }

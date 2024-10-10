@@ -44,11 +44,11 @@ public class UnlockedState extends DoorState{
   @Override
   public void unlock() {
     //en este caso no se si haria falta hacer algo,como no deberia canviar de estado...
-    System.out.println("The door is already unlocked.");
+    System.out.println("The door is already unlocked");
   }
 
   public String getStateName() {
-    return "unlocked";
+    return States.UNLOCKED;
   }
 
 
