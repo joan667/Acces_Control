@@ -1,6 +1,9 @@
 package baseNoStates;
 
 public class User {
+
+  //TODO añadir la area root
+
   private final String name;
   private final String credential;
 
