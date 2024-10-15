@@ -22,12 +22,24 @@ public class Door {
 
 
   public Door(String id) {
+    // Initialize the door
     this.id = id;
     this.closed = true;
 
-    //declarem el door state com a unlocked primer
+    // Declare the door state as unlocked first
+    this.doorState = new UnlockedState(this);
+  }
+
+  public Door(String id, Space space) {
+    // Initialize the door
+    this.id = id;
+    this.closed = true;
+
+    // Declare the door state as unlocked first
     this.doorState = new UnlockedState(this);
 
+    // Add the door to the space
+    space.addDoor(this);
   }
 
   public void processRequest(RequestReader request) {

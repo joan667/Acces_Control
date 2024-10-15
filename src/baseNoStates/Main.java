@@ -6,8 +6,9 @@ package baseNoStates;
 public class Main {
   public static void main(String[] args) {
 
-    //creo que habria que canviar esto por directoryAreas
-    DirectoryDoors.makeDoors();
+    //DirectoryDoors.makeDoors();
+    //DirectoryAreas.makeAreas();
+    DirectoryAreas.importAreas("src/resources/building.json");
 
 
     DirectoryUsers.makeUsers();

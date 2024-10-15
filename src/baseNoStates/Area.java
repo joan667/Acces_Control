@@ -4,7 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Area {
   protected String areaId;
-  abstract public void addChild(Object child);
+  protected ArrayList<Partition> parents = new ArrayList<Partition>();
+
+  public Area(String id) {
+    this.areaId = id;
+  }
 
   public Area(String id, Partition parent) {
     this.areaId = id;
@@ -13,4 +17,12 @@ public abstract class Area {
   }
 
   abstract public ArrayList<Door> getDoors();
+
+  public ArrayList<Partition> getParents() {
+    return parents;
+  }
+
+  public String getId() {
+    return areaId;
+  }
 }
