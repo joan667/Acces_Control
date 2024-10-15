@@ -2,25 +2,20 @@ package baseNoStates;
 import java.util.ArrayList;
 
 public abstract class Space extends Area {
+  private ArrayList<Door> doors = new ArrayList<Door>();
 
-  //lista de puertasd del espacio
-  private ArrayList<Door> doorlist = new ArrayList<Door>();
-
-  public Space(String name, Object parent )
-  {
-    super(name,parent);
+  public Space(String name, Partition parent) {
+    super(name, parent);
   }
 
-  @Override
-  abstract public void addChild(Object child)
-  {
-    if(child instanceof Door)
-    {
-      subPartitions.add((Door) child)
-    }
+  public void addDoor(Door door) {
+    if (!doors.contains(door))
+      throw new IllegalArgumentException("Door already exists in area");
+    doors.add(door);
+  }
 
-    //si no es del tipo de instancia que toca no hacemos nada
-
+  public ArrayList<Door> getDoors() {
+    return doors;
   }
 
 }

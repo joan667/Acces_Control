@@ -1,14 +1,16 @@
 package baseNoStates;
 
-public abstract class Area {
+import java.util.ArrayList;
 
-  protected String areaName
-  //le passamos Object para que luego cada implementacion se ocupe de hacer el casting i comprovaciones pertinentes
+public abstract class Area {
+  protected String areaId;
   abstract public void addChild(Object child);
 
-  public Area(String name, Object parent )
-  {
-    this.areaName = name;
-    parent.addChild(this);
+  public Area(String id, Partition parent) {
+    this.areaId = id;
+    if (parent != null)
+      parent.addChild(this);
   }
+
+  abstract public ArrayList<Door> getDoors();
 }
