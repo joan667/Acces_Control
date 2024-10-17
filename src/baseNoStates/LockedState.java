@@ -1,6 +1,6 @@
 package baseNoStates;
 
-public class LockedState extends  DoorState{
+public class LockedState extends DoorState {
 
   public LockedState(Door D)
   {

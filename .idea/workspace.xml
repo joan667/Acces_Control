@@ -1,7 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9adfbb6-fba3-4cde-ab94-28725d30aec7" name="Changes" comment="" />
+    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="DirectoryAreas init and doors">
+      <change beforePath="$PROJECT_DIR$/.idea/Acces_Control.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/Actions.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/DirectoryDoors.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/DirectoryUsers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/Door.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/WebServer$SocketThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/WebServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/requests/Request.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/requests/RequestArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/requests/RequestReader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/requests/RequestRefresh.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/uml/base_no_states.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/uml/base_no_states.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/uml/package_requests.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/baseNoStates/uml/package_requests.puml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/building.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/building.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D1_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D1_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D2_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D2_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D3_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D3_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D4_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D4_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D5_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D5_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D6_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D6_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D7_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D7_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D8_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D8_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D9_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/D9_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_closed.odg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_closed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_no_doors.odg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_no_doors.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_open.odg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_open.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/blueprint_open_and_closed.odg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/acs_students-master/simulator/images/extract_images.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/LockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/LockedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,45 +66,102 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectId" id="2nHg1nPqyPRrVBVzND2j7zriaDn" />
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;xavi-burgos99&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/joan667/Acces_Control.git&quot;,
+    &quot;accountId&quot;: &quot;2ceae51b-7a27-48e9-9300-a9564bb10b0e&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2nTUlWrlsPGnxqv7PtvSt8OaGke" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev/areas&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="baseNoStates.Main" />
+      <module name="Acces_Control" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c9adfbb6-fba3-4cde-ab94-28725d30aec7" name="Changes" comment="" />
-      <created>1728635204010</created>
+      <changelist id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="" />
+      <created>1728996711985</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1728635204010</updated>
+      <updated>1728996711985</updated>
+      <workItem from="1728996713322" duration="8305000" />
+      <workItem from="1729161171399" duration="635000" />
     </task>
+    <task id="LOCAL-00001" summary="DirectoryAreas init and doors">
+      <option name="closed" value="true" />
+      <created>1729009015497</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729009015497</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="DirectoryAreas init and doors" />
+    <option name="LAST_COMMIT_MESSAGE" value="DirectoryAreas init and doors" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
