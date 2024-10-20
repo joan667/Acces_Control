@@ -4,22 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="DirectoryAreas comments">
-      <change afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
+    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="Areas and User groups and comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Area.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryUserGroups.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/LockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/doorStates/LockedState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestRefresh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestRefresh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/UnlockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/doorStates/UnlockedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/resources/building.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/building.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +104,7 @@
       <workItem from="1729163845444" duration="1114000" />
       <workItem from="1729233661868" duration="554000" />
       <workItem from="1729234223343" duration="3474000" />
-      <workItem from="1729430737400" duration="17192000" />
+      <workItem from="1729430737400" duration="23520000" />
     </task>
     <task id="LOCAL-00001" summary="DirectoryAreas init and doors">
       <option name="closed" value="true" />
@@ -135,7 +130,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729430919964</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Areas and User groups and comments">
+      <option name="closed" value="true" />
+      <created>1729448638135</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1729448638135</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +159,8 @@
     <MESSAGE value="DirectoryAreas init and doors" />
     <MESSAGE value="DirectoryAreas make implementation" />
     <MESSAGE value="DirectoryAreas comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="DirectoryAreas comments" />
+    <MESSAGE value="Areas and User groups and comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Areas and User groups and comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

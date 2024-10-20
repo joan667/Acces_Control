@@ -1,20 +1,45 @@
 package baseNoStates;
 
 public abstract class DoorState {
-protected Door door;
-//protected String name;
+    private final String name = "unknown";
+    protected final Door door;
 
-abstract public void open();
-abstract public void close();
-abstract public void lock();
-abstract public void unlock();
-//abstract public void setDoor(Door D);
-abstract public String getStateName();
+    /**
+     * Create a new door state.
+     *
+     * @param door The door that the state belongs to
+     */
+    public DoorState(Door door) {
+        this.door = door;
+    }
 
+    /**
+     * Get the name of the state.
+     *
+     * @return The name of the state
+     */
+    public String getStateName() {
+        return name;
+    }
 
-  public DoorState(Door D)
-{
-  this.door = D;
-}
+    /**
+     * The actions that will be done in the state when the door is opened.
+     */
+    public abstract void open();
+
+    /**
+     * The actions that will be done in the state when the door is closed.
+     */
+    public abstract void close();
+
+    /**
+     * The actions that will be done in the state when the door is locked.
+     */
+    public abstract void lock();
+
+    /**
+     * The actions that will be done in the state when the door is unlocked.
+     */
+    public abstract void unlock();
 
 }

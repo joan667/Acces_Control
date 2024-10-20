@@ -31,15 +31,6 @@ public abstract class Area {
   }
 
   /**
-   * Get the partitions that contain the area.
-   *
-   * @return The partitions that contain the area
-   */
-  public ArrayList<Partition> getParents() {
-    return parents;
-  }
-
-  /**
    * Set a parent partition for the area.
    *
    * @param parent The parent partition
@@ -56,6 +47,15 @@ public abstract class Area {
    */
   public String getId() {
     return id;
+  }
+
+  /**
+   * Get the partitions that contain the area.
+   *
+   * @return The partitions that contain the area
+   */
+  public ArrayList<Partition> getParents() {
+    return parents;
   }
 
   /**

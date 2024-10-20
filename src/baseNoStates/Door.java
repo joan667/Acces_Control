@@ -2,6 +2,7 @@
 
 package baseNoStates;
 
+import baseNoStates.doorStates.UnlockedState;
 import baseNoStates.requests.RequestReader;
 import org.json.JSONObject;
 
@@ -11,7 +12,6 @@ public class Door {
     private DoorState doorState;
     private Space from;
     private Space to;
-
 
     /**
      * Create a new door with a name and the two spaces it connects.
@@ -64,32 +64,24 @@ public class Door {
         switch (action) {
             case Actions.OPEN:
                 // TODO: Open if is closed and is unlocked.
-                /* if (closed) {
-                    closed = false;
-                } else {
-                    System.out.println("Can't open door " + id + " because it's already open");
-                } */
+                //if (closed) closed = false;
+                //else System.out.println("Can't open door " + id + " because it's already open");
                 doorState.open();
                 break;
             case Actions.CLOSE:
                 // TODO: Close if is open.
-                /* if (closed) {
-                    System.out.println("Can't close door " + id + " because it's already closed");
-                } else {
-                    closed = true;
-                } */
+                //if (!closed) closed = true;
+                //else System.out.println("Can't close door " + id + " because it's already closed");
                 doorState.close();
                 break;
             case Actions.LOCK:
                 // TODO: Lock if is unlocked and closed. The user must be authorized.
                 doorState.lock();
                 break;
-            // fall through
             case Actions.UNLOCK:
                 // TODO: Unlock if is locked and closed. The user must be authorized.
                 doorState.unlock();
                 break;
-            // fall through
             case Actions.UNLOCK_SHORTLY:
                 // TODO: Unlock shortly if is locked and closed. The user must be authorized. The door will lock again after a short time.
                 System.out.println("Action " + action + " not implemented yet");

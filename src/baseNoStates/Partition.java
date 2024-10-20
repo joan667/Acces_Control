@@ -6,41 +6,22 @@ public class Partition extends Area {
     private ArrayList<Space> spaces = new ArrayList<Space>();
 
     /**
-     * Create a new partition with a name.
+     * Create a new partition with an id.
      *
-     * @param name The name of the partition
+     * @param id The id of the partition
      */
-    public Partition(String name) {
-        super(name);
+    public Partition(String id) {
+        super(id);
     }
 
     /**
-     * Create a new partition with a name and the parent partitions.
+     * Create a new partition with an id and the parent partitions.
      *
-     * @param name The name of the partition
+     * @param id The id of the partition
      * @param parents The list of parent partitions
      */
-    public Partition(String name, Partition... parents) {
-        super(name, parents);
-    }
-
-    /**
-     * Add a space to the partition.
-     *
-     * @param space The space to add
-     * @throws IllegalArgumentException If the space is already in the partition
-     */
-    public void addSpace(Space space) {
-        // Check if the space is already added
-        if (spaces.contains(space))
-            throw new IllegalArgumentException("Space already exists in partition");
-
-        // Add the space to the partition
-        spaces.add(space);
-
-        // Add the partition to the space if not already added
-        if (!space.parents.contains(this))
-            space.parents.add(this);
+    public Partition(String id, Partition... parents) {
+        super(id, parents);
     }
 
     /**
@@ -64,6 +45,25 @@ public class Partition extends Area {
         // Add the partition to the partition if not already added
         if (!partition.parents.contains(this))
             partition.parents.add(this);
+    }
+
+    /**
+     * Add a space to the partition.
+     *
+     * @param space The space to add
+     * @throws IllegalArgumentException If the space is already in the partition
+     */
+    public void addSpace(Space space) {
+        // Check if the space is already added
+        if (spaces.contains(space))
+            throw new IllegalArgumentException("Space already exists in partition");
+
+        // Add the space to the partition
+        spaces.add(space);
+
+        // Add the partition to the space if not already added
+        if (!space.parents.contains(this))
+            space.parents.add(this);
     }
 
     /**

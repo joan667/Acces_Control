@@ -2,6 +2,10 @@
 'https://plantuml.com/class-diagram
 skinparam classAttributeIconSize 0
 
+class Main {
++ {static} main(args : String)
+}
+
 class Webserver {
 - {static} PORT :int
 - {static} FORMATTER : DateTimeFormatter
@@ -25,59 +29,56 @@ inner class
 of Webserver
 end note
 
-class DirectoryDoors {
-- {static} allDoors : Door[]
-+ {static} makeDoors()
-+ {static} findDoorById(id : String) : Door
-+ {static} getAllDoors() : Door[]
-}
+'class DirectoryDoors {
+'- {static} allDoors : Door[]
+'+ {static} makeDoors()
+'+ {static} findDoorById(id : String) : Door
+'+ {static} getAllDoors() : Door[]
+'}
 
-DirectoryDoors --> "*" Door : "allDoors"
+'DirectoryDoors --> "*" Door : "allDoors"
 
-class DirectoryUsers {
-- {static} users : User[]
-+ {static} makeUsers()
-+ {static} findUserByCredential(credential : String) : User
-}
+'class DirectoryUsers {
+'- {static} users : User[]
+'+ {static} makeUsers()
+'+ {static} findUserByCredential(credential : String) : User
+'}
+'
+'DirectoryUsers --> "*" User : "users"
 
-DirectoryUsers --> "*" User : "users"
-
-class Door {
-- id : String
-- closed : boolean
-+ Door(id : String)
-+ processRequest(request : RequestReader)
-+ setState(doorState : DoorState)
-+ toJson() : JSONObject
+'class Door {
+'- id : String
+'- closed : boolean
+'+ Door(id : String)
+'+ processRequest(request : RequestReader)
+'+ setState(doorState : DoorState)
+'+ toJson() : JSONObject
 '+ toString() : String
 '+ isClosed() :boolean
 '+ setClosed(b : boolean)
 '+ getStateName() : String
-- doAction(action : String)
-}
+'- doAction(action : String)
+'}
 
 
-class User {
-- name : String
-- credential : String
-+ User(name: String, credential: String)
-+ toString() : String
-}
-
-
-class Main {
-+ {static} main(args : String)
-}
+'class User {
+'- name : String
+'- credential : String
+'+ User(name: String, credential: String)
+'+ toString() : String
+'}
 
 note right of Main::main
-DirectoryDoors.makeDoors()
-DiretoryUsers.makeUsers()
+DirectoryAreas.makeAreas()
+DiretoryUserGroups.makeUserGroups()
 new Webserver()
 end note
 
+Main --> Webserver : "new Webserver()"
+
 Main -[hidden]down- Webserver
-Webserver -[hidden]down- DirectoryDoors
-DirectoryDoors -[hidden]right- DirectoryUsers
+'Webserver -[hidden]down- DirectoryDoors
+'DirectoryDoors -[hidden]right- DirectoryUsers
 
 
 
@@ -85,7 +86,7 @@ DirectoryDoors -[hidden]right- DirectoryUsers
 'CUSTOM UML
 
 static class DirectoryAreas {
-- {static} rootArea
+- {static} rootArea : Area
 - {static} partitions : Partition[]
 - {static} spaces : Space[]
 - {static} doors : Door[]
@@ -99,17 +100,157 @@ static class DirectoryAreas {
 + {static} getAllDoors() : Door[]
 }
 
+Main --> DirectoryAreas : "makeAreas"
+DirectoryAreas --> Area : "rootArea"
+DirectoryAreas --> "*" Partition : "partitions"
+DirectoryAreas --> "*" Space : "spaces"
+DirectoryAreas --> "*" Door : "doors"
+
 abstract class Area {
 # id : String
 # parents : Partition[]
 + Area(id : String)
-+ Area(id : String, parent : Partition)
-+ getId() : String
-+ getDoors() : Door[]
-+ getParents() : Partition[]
++ Area(id : String, ...parents : Partition[])
 + addParent(parent : Partition)
-+ removeParent(parent : Partition)
++ getId() : String
++ getParents() : Partition[]
++ getDoors() : Door[]
 }
 
+Area --> "*" Partition : "parents"
+
+class Partition extends Area {
+- partitions : Partition[]
+- spaces : Space[]
++ Partition(id : String)
++ Partition(id : String, ...parents : Partition[])
++ addPartition(partition : Partition)
++ addSpace(space : Space)
++ addChild(area : Area)
++ getPartitions() : Partition[]
++ getSpaces() : Space[]
++ getDoors() : Door[]
+}
+
+Partition --> "*" Partition : "partitions"
+Partition --> "*" Space : "spaces"
+
+class Space extends Area {
+- doors : Door[]
++ Space(id : String)
++ Space(id : String, ...parents : Partition[])
++ addDoor(door : Door)
++ getDoors() : Door[]
+}
+
+Space --> "*" Door : "doors"
+
+class Door {
+- id : String
+- closed : boolean
+- doorState : DoorState
+- from : Space
+- to : Space
++ Door(id : String, from : Space, to : Space)
++ processRequest(request : RequestReader)
++ doAction(action : String)
++ isClosed() : boolean
++ setDoorState(doorState : DoorState)
++ setFromSpace(to : Space)
++ setToSpace(to : Space)
++ getId() : String
++ getFromSpace() : Space
++ getToSpace() : Space
++ getStateName() : String
++ toString() : String
++ toJson() : JSONObject
+}
+
+Door --> DoorState : "doorState"
+Door --> Space : "from"
+Door --> Space : "to"
+
+abstract class DoorState {
+# door : Door
++ DoorState(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
++ getStateName() : String
+}
+
+DoorState --> Door : "door"
+
+static class States {
+- {static} LOCKED : String
+- {static} UNLOCKED : String
+}
+
+class LockedState extends DoorState {
+- name : String
++ LockedState(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
+}
+
+class UnlockedState extends DoorState {
+- name : String
++ UnlockedState(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
+}
+
+LockedState --> States : name
+UnlockedState --> States : name
+
+
+static class DirectoryUserGroups {
+- {static} userGroups : UserGroup[]
+- {static} users : User[]
++ {static} makeUserGroups()
++ {static} findUserByCredential(credential : String) : User
+}
+
+Main --> DirectoryUserGroups : "makeUserGroups"
+DirectoryUserGroups --> "*" UserGroup : "userGroups"
+
+class UserGroup {
+- id : String
+- users : User[]
++ UserGroup(id : String)
++ UserGroup(id : String, ...users : User[])
++ addUser(user : User)
++ removeUser(user : User)
++ getUsers() : User[]
+}
+
+UserGroup --> "*" User : "users"
+
+class User {
+- name : String
+- credential : String
+- group : UserGroup
++ User(name : String, credential : String)
++ User(name : String, credential : String, group : UserGroup)
++ setGroup(group : UserGroup)
++ getName() : String
++ getCredential() : String
++ getGroup() : UserGroup
++ toString() : String
+}
+
+User --> UserGroup : "group"
+
+
+
+Main -[hidden]down- DirectoryAreas
+DirectoryAreas -[hidden]down- Area
+Partition -[hidden]right- Space
+DoorState -[hidden]right- Door
 
 @enduml

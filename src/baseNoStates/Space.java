@@ -5,22 +5,22 @@ public class Space extends Area {
     private final ArrayList<Door> doors = new ArrayList<Door>();
 
     /**
-     * Create a new space with a name.
+     * Create a new space with an id.
      *
-     * @param name The name of the space
+     * @param id The id of the space
      */
-    public Space(String name) {
-        super(name);
+    public Space(String id) {
+        super(id);
     }
 
     /**
-     * Create a new space with a name and the parent partitions.
+     * Create a new space with an id and the parent partitions.
      *
-     * @param name The name of the space
+     * @param id The id of the space
      * @param parents The list of parent partitions
      */
-    public Space(String name, Partition... parents) {
-        super(name, parents);
+    public Space(String id, Partition... parents) {
+        super(id, parents);
     }
 
     /**
