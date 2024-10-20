@@ -99,8 +99,16 @@ static class DirectoryAreas {
 + {static} getAllDoors() : Door[]
 }
 
-class Area {
-
+abstract class Area {
+# id : String
+# parents : Partition[]
++ Area(id : String)
++ Area(id : String, parent : Partition)
++ getId() : String
++ getDoors() : Door[]
++ getParents() : Partition[]
++ addParent(parent : Partition)
++ removeParent(parent : Partition)
 }
 
 

@@ -4,16 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="DirectoryAreas make implementation">
+    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="DirectoryAreas comments">
+      <change afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Area.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryAreas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryDoors.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DirectoryUsers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DirectoryUserGroups.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/baseNoStates/requests/RequestRefresh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/requests/RequestRefresh.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/building.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/resources/building.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -39,27 +57,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Debug&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev/areas&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev/areas",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="baseNoStates.Main" />
@@ -90,6 +109,7 @@
       <workItem from="1729163845444" duration="1114000" />
       <workItem from="1729233661868" duration="554000" />
       <workItem from="1729234223343" duration="3474000" />
+      <workItem from="1729430737400" duration="17192000" />
     </task>
     <task id="LOCAL-00001" summary="DirectoryAreas init and doors">
       <option name="closed" value="true" />
@@ -107,16 +127,36 @@
       <option name="project" value="LOCAL" />
       <updated>1729164325784</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="DirectoryAreas comments">
+      <option name="closed" value="true" />
+      <created>1729430919964</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1729430919964</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="DirectoryAreas init and doors" />
     <MESSAGE value="DirectoryAreas make implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="DirectoryAreas make implementation" />
+    <MESSAGE value="DirectoryAreas comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="DirectoryAreas comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

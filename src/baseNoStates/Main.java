@@ -6,12 +6,17 @@ package baseNoStates;
 public class Main {
   public static void main(String[] args) {
 
-    //DirectoryDoors.makeDoors();
-    //DirectoryAreas.makeAreas();
-    DirectoryAreas.importAreas("src/resources/building.json");
+    // Create areas
+    DirectoryAreas.makeAreas();   // Or import JSON using: DirectoryAreas.importAreas("src/resources/building.json");
 
+    // Create users
+    DirectoryUserGroups.makeUserGroups();
 
-    DirectoryUsers.makeUsers();
+    // Show link to the web server
+    System.out.println("Simulator at: http://localhost:63342/Acces_Control/simulator/building.html");
+
+    // Start the web server
     new WebServer();
+
   }
 }

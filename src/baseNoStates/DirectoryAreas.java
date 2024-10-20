@@ -3,7 +3,6 @@ package baseNoStates;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -116,23 +115,25 @@ public final class DirectoryAreas  {
       for (int i = 0; i < jsonDoors.length(); i++) {
         JSONObject jsonDoor = jsonDoors.getJSONObject(i);
         String id = jsonDoor.getString("id");
-        Door door = new Door(id);
-        doors.add(door);
-        if (jsonDoor.has("spaces")) {
-          JSONArray jsonParents = jsonDoor.getJSONArray("spaces");
-          for (int j = 0; j < jsonParents.length(); j++) {
-            String parentId = jsonParents.getString(j);
-            Space parent = null;
-            for (Space s : spaces)
-              if (s.getId().equals(parentId)) {
-                parent = s;
-                break;
-              }
-            if (parent == null)
-              throw new IllegalArgumentException("Parent space not found");
-            parent.addDoor(door);
+        String fromId = jsonDoor.getString("from");
+        String toId = jsonDoor.getString("to");
+        Space from = null;
+        Space to = null;
+        for (Space s : spaces) {
+          if (s.getId().equals(fromId))
+            from = s;
+          if (s.getId().equals(toId))
+            to = s;
+          if (from != null && to != null) {
+            if (from == to)
+              throw new IllegalArgumentException("Door cannot connect the same space");
+            break;
           }
         }
+        if (from == null || to == null)
+          throw new IllegalArgumentException("Door spaces not found");
+        Door door = new Door(id, from, to);
+        doors.add(door);
       }
     }
     // Check if root area is not defined
@@ -162,30 +163,30 @@ public final class DirectoryAreas  {
     Partition basement    = new Partition("basement",     building);
     Partition groundFloor = new Partition("ground floor", building);
     Partition floor1      = new Partition("floor 1",      building);
-    Partition stairs      = new Partition("stairs",       building);
-    Partition exterior    = new Partition("exterior",     building);
-    partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1, stairs, exterior));
+    partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1));
 
     // Initialize the spaces
-    Space parking  = new Space("parking", basement);
-    Space hall     = new Space("hall",    groundFloor);
-    Space room1    = new Space("room 1",  groundFloor);
-    Space room2    = new Space("room 2",  groundFloor);
-    Space room3    = new Space("room 3",  floor1);
+    Space parking  = new Space("parking",  basement);
+    Space exterior = new Space("exterior", basement);
+    Space stairs   = new Space("stairs",   basement, groundFloor, floor1);
+    Space hall     = new Space("hall",     groundFloor);
+    Space room1    = new Space("room 1",   groundFloor);
+    Space room2    = new Space("room 2",   groundFloor);
+    Space room3    = new Space("room 3",   floor1);
     Space corridor = new Space("corridor", floor1);
     Space it       = new Space("IT",       floor1);
-    spaces = new ArrayList<Space>(Arrays.asList(parking, hall, room1, room2, room3, corridor, it));
+    spaces = new ArrayList<Space>(Arrays.asList(parking, exterior, stairs, hall, room1, room2, room3, corridor, it));
 
     // Initialize the doors
-    Door d1 = new Door("D1", parking);
-    Door d2 = new Door("D2", parking);
-    Door d3 = new Door("D3", hall);
-    Door d4 = new Door("D4", hall);
-    Door d5 = new Door("D5", room1);
-    Door d6 = new Door("D6", room2);
-    Door d7 = new Door("D7", corridor);
-    Door d8 = new Door("D8", room3);
-    Door d9 = new Door("D9", it);
+    Door d1 = new Door("D1", parking,  exterior);
+    Door d2 = new Door("D2", parking,  stairs);
+    Door d3 = new Door("D3", hall,     exterior);
+    Door d4 = new Door("D4", hall,     stairs);
+    Door d5 = new Door("D5", room1,    hall);
+    Door d6 = new Door("D6", room2,    hall);
+    Door d7 = new Door("D7", corridor, stairs);
+    Door d8 = new Door("D8", room3,    corridor);
+    Door d9 = new Door("D9", it,       corridor);
     doors = new ArrayList<Door>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9));
 
     // Set the root area
@@ -204,10 +205,12 @@ public final class DirectoryAreas  {
     for (Partition partition : partitions)
       if (partition.getId().equals(id))
         return partition;
+
     // Loop through all spaces to find it
     for (Space space : spaces)
       if (space.getId().equals(id))
         return space;
+
     // Throw error if not found
     throw new IllegalArgumentException("Area with id \"" + id + "\" not found");
   }
@@ -224,6 +227,7 @@ public final class DirectoryAreas  {
     for (Door door : doors)
       if (door.getId().equals(id))
         return door;
+
     // Throw error if not found
     throw new IllegalArgumentException("Door with id \"" + id + "\" not found");
   }
@@ -261,6 +265,11 @@ public final class DirectoryAreas  {
    * @return The list of all doors
    */
   public static ArrayList<Door> getAllDoors() {
+    // Check if the root area is set and return its doors
+    if (rootArea != null)
+      return rootArea.getDoors();
+
+    // Return all the doors
     return doors;
   }
 

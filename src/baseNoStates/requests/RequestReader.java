@@ -1,8 +1,9 @@
 package baseNoStates.requests;
 
-import baseNoStates.DirectoryDoors;
-import baseNoStates.DirectoryUsers;
+import baseNoStates.DirectoryUserGroups;
+import baseNoStates.DirectoryAreas;
 import baseNoStates.Door;
+import baseNoStates.UserGroup;
 import baseNoStates.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -77,8 +78,8 @@ public class RequestReader implements Request {
   // see if the request is authorized and put this into the request, then send it to the door.
   // if authorized, perform the action.
   public void process() {
-    User user = DirectoryUsers.findUserByCredential(credential);
-    Door door = DirectoryDoors.findDoorById(doorId);
+    User user = DirectoryUserGroups.findUserByCredential(credential);
+    Door door = DirectoryAreas.findDoorById(doorId);
     assert door != null : "door " + doorId + " not found";
     authorize(user, door);
     // this sets the boolean authorize attribute of the request

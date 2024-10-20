@@ -1,31 +1,31 @@
 {
   "partitions": [
-    { "id": "building"                                     },
-    { "id": "basement",     "partitions": ["building"]     },
-    { "id": "ground floor", "partitions": ["building"]     },
-    { "id": "floor 1",      "partitions": ["building"]     },
-    { "id": "stairs",       "partitions": ["building"]     },
-    { "id": "exterior",     "partitions": ["building"]     }
+    { "id": "building"                                 },
+    { "id": "basement",     "partitions": ["building"] },
+    { "id": "ground floor", "partitions": ["building"] },
+    { "id": "floor 1",      "partitions": ["building"] }
   ],
   "spaces": [
-    { "id": "parking",      "partitions": ["basement"]     },
-    { "id": "hall",         "partitions": ["ground floor"] },
-    { "id": "room 1",       "partitions": ["ground floor"] },
-    { "id": "room 2",       "partitions": ["ground floor"] },
-    { "id": "room 3",       "partitions": ["floor 1"]      },
-    { "id": "corridor",     "partitions": ["floor 1"]      },
-    { "id": "IT",           "partitions": ["floor 1"]      }
+    { "id": "parking",  "partitions": ["basement"]                            },
+    { "id": "exterior", "partitions": ["basement"]                            },
+    { "id": "stairs",   "partitions": ["basement", "ground floor", "floor 1"] },
+    { "id": "hall",     "partitions": ["ground floor"]                        },
+    { "id": "room 1",   "partitions": ["ground floor"]                        },
+    { "id": "room 2",   "partitions": ["ground floor"]                        },
+    { "id": "room 3",   "partitions": ["floor 1"]                             },
+    { "id": "corridor", "partitions": ["floor 1"]                             },
+    { "id": "IT",       "partitions": ["floor 1"]                             }
   ],
   "doors": [
-    { "id": "D1",           "spaces":     ["parking"]      },
-    { "id": "D2",           "spaces":     ["parking"]      },
-    { "id": "D3",           "spaces":     ["hall"]         },
-    { "id": "D4",           "spaces":     ["hall"]         },
-    { "id": "D5",           "spaces":     ["room 1"]       },
-    { "id": "D6",           "spaces":     ["room 2"]       },
-    { "id": "D7",           "spaces":     ["corridor"]     },
-    { "id": "D8",           "spaces":     ["room 3"]       },
-    { "id": "D9",           "spaces":     ["IT"]           }
+    { "id": "D1", "from": "parking",  "to": "exterior" },
+    { "id": "D2", "from": "parking",  "to": "stairs"   },
+    { "id": "D3", "from": "hall",     "to": "exterior" },
+    { "id": "D4", "from": "hall",     "to": "stairs"   },
+    { "id": "D5", "from": "room 1",   "to": "hall"     },
+    { "id": "D6", "from": "room 2",   "to": "hall"     },
+    { "id": "D7", "from": "corridor", "to": "stairs"   },
+    { "id": "D8", "from": "room 3",   "to": "corridor" },
+    { "id": "D9", "from": "IT",       "to": "corridor" }
   ],
   "root": "building"
 }
