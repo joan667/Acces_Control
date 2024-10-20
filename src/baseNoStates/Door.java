@@ -18,9 +18,7 @@ public class Door {
   public void setClosed(boolean closed) {
     this.closed = closed;
   }
-
-
-
+  
   public Door(String id) {
     // Initialize the door
     this.id = id;

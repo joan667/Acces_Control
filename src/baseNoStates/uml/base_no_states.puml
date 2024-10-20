@@ -78,4 +78,30 @@ end note
 Main -[hidden]down- Webserver
 Webserver -[hidden]down- DirectoryDoors
 DirectoryDoors -[hidden]right- DirectoryUsers
+
+
+
+
+'CUSTOM UML
+
+static class DirectoryAreas {
+- {static} rootArea
+- {static} partitions : Partition[]
+- {static} spaces : Space[]
+- {static} doors : Door[]
++ {static} importAreas(filename : String)
++ {static} makeAreas()
++ {static} findAreaById(id : String) : Area
++ {static} findDoorById(id : String) : Door
++ {static} getRootArea() : Area
++ {static} getAllPartitions() : Partition[]
++ {static} getAllSpaces() : Space[]
++ {static} getAllDoors() : Door[]
+}
+
+class Area {
+
+}
+
+
 @enduml
