@@ -5,8 +5,6 @@ import baseNoStates.DoorState;
 import baseNoStates.States;
 
 public final class LockedState extends DoorState {
-    private final String name = States.LOCKED;
-
     /**
      * Create a new locked state.
      *
@@ -14,6 +12,7 @@ public final class LockedState extends DoorState {
      */
     public LockedState(Door door) {
         super(door);
+        name = States.LOCKED;
     }
 
     /**

@@ -32,6 +32,12 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup employees = new UserGroup("employees", employeesSchedule);
+    employees.addActions(Actions.OPEN, Actions.CLOSE, Actions.UNLOCK_SHORTLY);
+    employees.addAreas(
+      DirectoryAreas.findAreaById("ground floor"),
+      DirectoryAreas.findAreaById("floor 1"),
+      DirectoryAreas.findAreaById("exterior"),
+      DirectoryAreas.findAreaById("stairs"));
     userGroups.add(employees);
 
     // Add the users
@@ -54,6 +60,8 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup managers = new UserGroup("managers", managersSchedule);
+    managers.addActions(Actions.OPEN, Actions.CLOSE, Actions.UNLOCK_SHORTLY, Actions.LOCK, Actions.UNLOCK);
+    managers.addAreas(DirectoryAreas.getRootArea());
     userGroups.add(managers);
 
     // Add the users
@@ -75,6 +83,8 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup admin = new UserGroup("admin", adminSchedule);
+    admin.addActions(Actions.OPEN, Actions.CLOSE, Actions.UNLOCK_SHORTLY, Actions.LOCK, Actions.UNLOCK);
+    admin.addAreas(DirectoryAreas.getRootArea());
     userGroups.add(admin);
 
     // Add the users

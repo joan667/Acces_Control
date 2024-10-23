@@ -1,7 +1,7 @@
 package baseNoStates;
 
 public abstract class DoorState {
-    private final String name = "unknown";
+    protected String name = "unknown";
     protected final Door door;
 
     /**

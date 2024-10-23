@@ -19,11 +19,11 @@ public final class Actions {
 
     // Create the actions list and return it
     actions = new ArrayList<String>();
-    actions.add(LOCK);
-    actions.add(UNLOCK);
-    actions.add(UNLOCK_SHORTLY);
     actions.add(OPEN);
     actions.add(CLOSE);
+    actions.add(UNLOCK_SHORTLY);
+    actions.add(UNLOCK);
+    actions.add(LOCK);
     return actions;
   }
 }

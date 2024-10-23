@@ -5,8 +5,6 @@ import baseNoStates.DoorState;
 import baseNoStates.States;
 
 public final class UnlockedState extends DoorState {
-    private final String name = States.UNLOCKED;
-
     /**
      * Create a new unlocked state.
      *
@@ -14,6 +12,7 @@ public final class UnlockedState extends DoorState {
      */
     public UnlockedState(Door door) {
         super(door);
+        name = States.UNLOCKED;
     }
 
     /**
@@ -44,6 +43,13 @@ public final class UnlockedState extends DoorState {
      * The actions that will be done in the state when the door is locked.
      */
     public void lock() {
+        // Check if the door is not closed
+        if (!door.isClosed()) {
+            System.out.println("The door is not closed. Close it first");
+            return;
+        }
+
+        // Set the door state to locked
         door.setDoorState(new LockedState(door));
         System.out.println("The door is now locked");
     }

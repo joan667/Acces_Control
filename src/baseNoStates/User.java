@@ -1,5 +1,7 @@
 package baseNoStates;
 
+import java.time.LocalDateTime;
+
 public class User {
     private final String name;
     private final String credential;
@@ -49,18 +51,19 @@ public class User {
     }
 
     /**
-     * Check if the user has access to a specific action.
+     * Check if the user has access to a specific action in the current time.
      *
      * @param action The action to check
+     * @param datetime The date and time to check
      * @return True if the user has access to the action, false otherwise
      */
-    public boolean canPerform(String action) {
+    public boolean canPerform(String action, LocalDateTime datetime) {
         // Check if the user is not in a group
         if (group == null)
             return false;
 
         // Check if the user group has access to the action
-        return group.canPerform(action);
+        return group.canPerform(action, datetime);
     }
 
     /**

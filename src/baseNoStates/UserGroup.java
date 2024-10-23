@@ -93,6 +93,17 @@ public class UserGroup {
     }
 
     /**
+     * Add multiple areas to the group.
+     *
+     * @param areas The areas to add
+     */
+    public void addAreas(Area... areas) {
+        // Loop through all areas
+        for (Area area : areas)
+            addArea(area);
+    }
+
+    /**
      * Remove an area from the group.
      *
      * @param area The area to remove
@@ -119,11 +130,22 @@ public class UserGroup {
             throw new IllegalArgumentException("Action already exists in group");
 
         // Check if the action is valid
-        if (Actions.getActions().contains(action))
+        if (!Actions.getActions().contains(action))
             throw new IllegalArgumentException("Action is not valid");
 
         // Add the action to the group list
         actions.add(action);
+    }
+
+    /**
+     * Add multiple actions to the group.
+     *
+     * @param actions The actions to add
+     */
+    public void addActions(String... actions) {
+        // Loop through all actions
+        for (String action : actions)
+            addAction(action);
     }
 
     /**
@@ -169,19 +191,19 @@ public class UserGroup {
     }
 
     /**
-     * Check if the group has access to a specific action.
+     * Check if the group has access to a specific action in the current time.
      *
      * @param action The action to check
+     * @param datetime The date and time to check
      * @return True if the group has access to the action, false otherwise
      */
-    public boolean canPerform(String action) {
+    public boolean canPerform(String action, LocalDateTime datetime) {
         // Check if the action is not in the list
         if (!actions.contains(action))
             return false;
 
         // Check if the user can perform the action at the current time
-        LocalDateTime now = LocalDateTime.now();
-        return schedule.isInSchedule(now);
+        return schedule.isInSchedule(datetime);
     }
 
     /**
