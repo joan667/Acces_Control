@@ -16,28 +16,15 @@ public final class ProppedState extends DoorState {
     }
 
     /**
-     * The actions that will be done in the state when the door is opened.
-     */
-    public void open() {
-        if (door.isClosed()) {
-            door.setClosed(false);
-            System.out.println("The door is now open");
-        } else {
-            System.out.println("The door is already open");
-        }
-    }
-
-    /**
      * The actions that will be done in the state when the door is closed.
      */
     public void close() {
-        if (!door.isClosed()) {
-            door.setClosed(true);
-            door.setDoorState(new LockedState(door));
-            System.out.println("The door is now closed and has been locked");
-        } else {
-            System.out.println("The door is already closed");
-        }
+        // Close the door
+        door.setClosed(true);
+
+        // Set the door to locked
+        door.setDoorState(new LockedState(door));
+        System.out.println("The door is now closed and has been locked");
     }
 
     /**
@@ -45,14 +32,6 @@ public final class ProppedState extends DoorState {
      */
     public void lock() {
         System.out.println("Close the door and it will be locked automatically");
-    }
-
-    /**
-     * The actions that will be done in the state when the door is unlocked.
-     */
-    public void unlock() {
-        door.setDoorState(new UnlockedState(door));
-        System.out.println("The door is now unlocked");
     }
 
 }

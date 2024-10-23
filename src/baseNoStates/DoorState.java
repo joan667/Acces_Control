@@ -1,5 +1,9 @@
 package baseNoStates;
 
+import baseNoStates.doorStates.LockedState;
+import baseNoStates.doorStates.UnlockedState;
+import baseNoStates.doorStates.UnlockedShortlyState;
+
 public abstract class DoorState {
     protected String name = "unknown";
     protected final Door door;
@@ -25,21 +29,78 @@ public abstract class DoorState {
     /**
      * The actions that will be done in the state when the door is opened.
      */
-    public abstract void open();
+    public void open() {
+        // Check if the door is already open
+        if (!this.door.isClosed()) {
+            System.out.println("The door is already open.");
+            return;
+        }
+
+        // Set the door to open
+        this.door.setClosed(false);
+        System.out.println("The door is now open.");
+    }
 
     /**
      * The actions that will be done in the state when the door is closed.
      */
-    public abstract void close();
+    public void close() {
+        // Check if the door is already closed
+        if (this.door.isClosed()) {
+            System.out.println("The door is already closed.");
+            return;
+        }
+
+        // Set the door to closed
+        this.door.setClosed(true);
+        System.out.println("The door is now closed.");
+    }
 
     /**
      * The actions that will be done in the state when the door is locked.
      */
-    public abstract void lock();
+    public void lock() {
+        // Check if the door is not closed
+        if (!this.door.isClosed()) {
+            System.out.println("The door is not closed. Close it first.");
+            return;
+        }
+
+        // TODO: Cancel the timer of the unlocked shortly state if it is active
+
+        // Set the door state to locked
+        this.door.setDoorState(new LockedState(this.door));
+        System.out.println("The door is now locked.");
+    }
 
     /**
      * The actions that will be done in the state when the door is unlocked.
      */
-    public abstract void unlock();
+    public void unlock() {
+        // TODO: Cancel the timer of the unlocked shortly state if it is active
+
+        // Set the door state to unlocked
+        this.door.setDoorState(new UnlockedState(this.door));
+        System.out.println("The door is now unlocked.");
+    }
+
+    /**
+     * The actions that will be done in the state when the door is unlocked shortly.
+     */
+    public void unlockShortly() {
+        // TODO: Cancel the timer of the unlocked shortly state if it is active
+
+        // TODO: Start a timer to lock the door again after a short time
+
+        // Check if unlocked shortly was already activated
+        if (door.getStateName().equals(States.UNLOCKED_SHORTLY)) {
+            System.out.println("The unlocked shortly timer has been reset.");
+            return;
+        }
+
+        // Set the door state to unlocked shortly
+        this.door.setDoorState(new UnlockedShortlyState(this.door));
+        System.out.println("The door is now unlocked shortly.");
+    }
 
 }
