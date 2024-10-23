@@ -7,7 +7,8 @@ public class UserGroup {
     private final String id;
     private final Schedule schedule;
     private final ArrayList<Area> areas = new ArrayList<Area>();
-    private ArrayList<User> users = new ArrayList<User>();
+    private final ArrayList<String> actions = new ArrayList<String>();
+    private final ArrayList<User> users = new ArrayList<User>();
 
     /**
      * Create a new user group with an id and a schedule.
@@ -106,6 +107,40 @@ public class UserGroup {
     }
 
     /**
+     * Add an action to the group.
+     *
+     * @param action The action to add
+     * @throws IllegalArgumentException If the action is already in the group
+     */
+    public void addAction(String action) {
+        // Check if the action is already added
+        if (actions.contains(action))
+            throw new IllegalArgumentException("Action already exists in group");
+
+        // Check if the action is valid
+        if (Actions.getActions().contains(action))
+            throw new IllegalArgumentException("Action is not valid");
+
+        // Add the action to the group list
+        actions.add(action);
+    }
+
+    /**
+     * Remove an action from the group.
+     *
+     * @param action The action to remove
+     * @throws IllegalArgumentException If the action does not exist in the group
+     */
+    public void removeAction(String action) {
+        // Check if the action is in the group
+        if (!actions.contains(action))
+            throw new IllegalArgumentException("Action does not exist in group");
+
+        // Remove the action from the group list
+        actions.remove(action);
+    }
+
+    /**
      * Check if the group has access to a specific space.
      *
      * @param space The space to check
@@ -130,6 +165,16 @@ public class UserGroup {
 
         // If the group does not have access to the space, return false
         return false;
+    }
+
+    /**
+     * Check if the group has access to a specific action.
+     *
+     * @param action The action to check
+     * @return True if the group has access to the action, false otherwise
+     */
+    public boolean canPerform(String action) {
+        return actions.contains(action);
     }
 
     /**

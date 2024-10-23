@@ -49,6 +49,21 @@ public class User {
     }
 
     /**
+     * Check if the user has access to a specific action.
+     *
+     * @param action The action to check
+     * @return True if the user has access to the action, false otherwise
+     */
+    public boolean canPerform(String action) {
+        // Check if the user is not in a group
+        if (group == null)
+            return false;
+
+        // Check if the user group has access to the action
+        return group.canPerform(action);
+    }
+
+    /**
      * Set the group of the user.
      *
      * @param group The group of the user
