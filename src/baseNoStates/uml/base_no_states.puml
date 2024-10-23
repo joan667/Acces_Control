@@ -145,6 +145,7 @@ DoorState --> Door : "door"
 static class States {
 - {static} LOCKED : String
 - {static} UNLOCKED : String
+- {static} UNLOCKED_SHORTLY : String
 - {static} PROPPED : String
 }
 
@@ -164,6 +165,14 @@ class UnlockedState extends DoorState {
 + unlock()
 }
 
+class UnlockedShortlyState extends DoorState {
++ UnlockedShortlyState(door : Door)
++ open()
++ close()
++ lock()
++ unlock()
+}
+
 class ProppedState extends DoorState {
 + ProppedState(door : Door)
 + open()
@@ -174,6 +183,7 @@ class ProppedState extends DoorState {
 
 LockedState --> States : name
 UnlockedState --> States : name
+UnlockedShortlyState --> States : name
 ProppedState --> States : name
 
 
