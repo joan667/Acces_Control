@@ -34,6 +34,21 @@ public class User {
     }
 
     /**
+     * Check if the user has access to a specific space.
+     *
+     * @param space The space to check
+     * @return True if the user has access to the space, false otherwise
+     */
+    public boolean hasAccess(Space space) {
+        // Check if the user is not in a group
+        if (group == null)
+            return false;
+
+        // Check if the user group has access to the space
+        return group.hasAccess(space);
+    }
+
+    /**
      * Set the group of the user.
      *
      * @param group The group of the user

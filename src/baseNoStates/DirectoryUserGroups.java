@@ -32,6 +32,7 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup employees = new UserGroup("employees", employeesSchedule);
+    userGroups.add(employees);
 
     // Add the users
     users.add(new User("Ernest", "74984", employees));
@@ -53,6 +54,7 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup managers = new UserGroup("managers", managersSchedule);
+    userGroups.add(managers);
 
     // Add the users
     users.add(new User("Manel", "95783", managers));
@@ -73,6 +75,7 @@ public final class DirectoryUserGroups {
 
     // Create the user group
     UserGroup admin = new UserGroup("admin", adminSchedule);
+    userGroups.add(admin);
 
     // Add the users
     users.add(new User("Ana", "11343", admin));

@@ -6,6 +6,7 @@ public class UserGroup {
 
     private final String id;
     private final Schedule schedule;
+    private final ArrayList<Area> areas = new ArrayList<Area>();
     private ArrayList<User> users = new ArrayList<User>();
 
     /**
@@ -72,6 +73,63 @@ public class UserGroup {
 
         // Remove the user from the group list
         users.remove(user);
+    }
+
+    /**
+     * Add an area to the group.
+     *
+     * @param area The area to add
+     * @throws IllegalArgumentException If the area is already in the group
+     */
+    public void addArea(Area area) {
+        // Check if the area is already added
+        if (areas.contains(area))
+            throw new IllegalArgumentException("Area already exists in group");
+
+        // Add the area to the group list
+        areas.add(area);
+    }
+
+    /**
+     * Remove an area from the group.
+     *
+     * @param area The area to remove
+     * @throws IllegalArgumentException If the area does not exist in the group
+     */
+    public void removeArea(Area area) {
+        // Check if the area is in the group
+        if (!areas.contains(area))
+            throw new IllegalArgumentException("Area does not exist in group");
+
+        // Remove the area from the group list
+        areas.remove(area);
+    }
+
+    /**
+     * Check if the group has access to a specific space.
+     *
+     * @param space The space to check
+     * @return True if the group has access to the space, false otherwise
+     */
+    public boolean hasAccess(Space space) {
+        // Loop through all areas
+        for (Area area : areas) {
+
+            // Check if the area is a space and if it is the same space
+            if (area instanceof Space) {
+                if (area.equals(space))
+                    return true;
+
+            // Check if the area is a partition and if it contains the space
+            } else if (area instanceof Partition) {
+                ArrayList<Space> spaces = ((Partition) area).getSpaces();
+                if (spaces.contains(space))
+                    return true;
+            }
+        }
+
+        // If the group does not have access to the space, return false
+        return false;
     }
 
     /**

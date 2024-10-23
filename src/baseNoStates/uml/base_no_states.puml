@@ -29,45 +29,6 @@ inner class
 of Webserver
 end note
 
-'class DirectoryDoors {
-'- {static} allDoors : Door[]
-'+ {static} makeDoors()
-'+ {static} findDoorById(id : String) : Door
-'+ {static} getAllDoors() : Door[]
-'}
-
-'DirectoryDoors --> "*" Door : "allDoors"
-
-'class DirectoryUsers {
-'- {static} users : User[]
-'+ {static} makeUsers()
-'+ {static} findUserByCredential(credential : String) : User
-'}
-'
-'DirectoryUsers --> "*" User : "users"
-
-'class Door {
-'- id : String
-'- closed : boolean
-'+ Door(id : String)
-'+ processRequest(request : RequestReader)
-'+ setState(doorState : DoorState)
-'+ toJson() : JSONObject
-'+ toString() : String
-'+ isClosed() :boolean
-'+ setClosed(b : boolean)
-'+ getStateName() : String
-'- doAction(action : String)
-'}
-
-
-'class User {
-'- name : String
-'- credential : String
-'+ User(name: String, credential: String)
-'+ toString() : String
-'}
-
 note right of Main::main
 DirectoryAreas.makeAreas()
 DiretoryUserGroups.makeUserGroups()
@@ -77,8 +38,7 @@ end note
 Main --> Webserver : "new Webserver()"
 
 Main -[hidden]down- Webserver
-'Webserver -[hidden]down- DirectoryDoors
-'DirectoryDoors -[hidden]right- DirectoryUsers
+
 
 
 
@@ -223,14 +183,19 @@ class UserGroup {
 - id : String
 - schedule : Schedule
 - users : User[]
+- areas : Area[]
 + UserGroup(id : String, schedule : Schedule)
 + UserGroup(id : String, schedule : Schedule, ...users : User[])
 + addUser(user : User)
 + removeUser(user : User)
++ addArea(area : Area)
++ removeArea(area : Area)
++ hasAccess(space : Space) : boolean
 + getUsers() : User[]
 }
 
 UserGroup --> "*" User : "users"
+UserGroup --> "*" Area : "areas"
 
 class User {
 - name : String
@@ -238,6 +203,7 @@ class User {
 - group : UserGroup
 + User(name : String, credential : String)
 + User(name : String, credential : String, group : UserGroup)
++ hasAccess(space : Space) : boolean
 + setGroup(group : UserGroup)
 + getName() : String
 + getCredential() : String
