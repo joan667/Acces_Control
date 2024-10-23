@@ -1,6 +1,7 @@
 package baseNoStates;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public final class DirectoryUserGroups {
   private static final ArrayList<User> users = new ArrayList<User>();
@@ -10,11 +11,6 @@ public final class DirectoryUserGroups {
    * Create the user groups and add some users to them.
    */
   public static void makeUserGroups() {
-    // Create the user groups
-    UserGroup employees = new UserGroup("employees");
-    UserGroup managers = new UserGroup("managers");
-    UserGroup admin = new UserGroup("admin");
-
     // Add some users with no privileges:
     // - Users without any privilege, just to keep temporally users instead of deleting them, this is to withdraw all
     //   permissions but still to keep user data to give back permissions later.
@@ -26,6 +22,18 @@ public final class DirectoryUserGroups {
     // - Week: Mon. - Fri. 9:00 am - 5:00 pm
     // - Some actions: Just "shortly unlock"
     // - Some areas: "ground floor", "floor 1", "exterior", "stairs" (this, for all), that is, everywhere but the parking
+
+    // Create the schedule
+    ArrayList<Day> employeesDays = Day.getWeekDays();
+    ArrayList<DaySchedule> employeesDaySchedules = new ArrayList<DaySchedule>();
+    for (Day day : employeesDays)
+      employeesDaySchedules.add(new DaySchedule(day, 9, 17));
+    Schedule employeesSchedule = new Schedule(LocalDate.of(2024, 9, 1), LocalDate.of(2025, 3, 1), employeesDaySchedules);
+
+    // Create the user group
+    UserGroup employees = new UserGroup("employees", employeesSchedule);
+
+    // Add the users
     users.add(new User("Ernest", "74984", employees));
     users.add(new User("Eulalia", "43295", employees));
 
@@ -34,6 +42,19 @@ public final class DirectoryUserGroups {
     // - Week: Mon - Sat. 8:00 am - 8:00 pm
     // - All actions
     // - All areas
+
+    // Create the schedule
+    ArrayList<Day> managersDays = Day.getWeekDays();
+    managersDays.add(new Day(Day.Saturday));
+    ArrayList<DaySchedule> managersDaySchedules = new ArrayList<DaySchedule>();
+    for (Day day : managersDays)
+      managersDaySchedules.add(new DaySchedule(day, 8, 20));
+    Schedule managersSchedule = new Schedule(LocalDate.of(2024, 9, 1), LocalDate.of(2025, 3, 1), managersDaySchedules);
+
+    // Create the user group
+    UserGroup managers = new UserGroup("managers", managersSchedule);
+
+    // Add the users
     users.add(new User("Manel", "95783", managers));
     users.add(new User("Marta", "05827", managers));
 
@@ -42,6 +63,18 @@ public final class DirectoryUserGroups {
     // - All week
     // - All actions
     // - All areas
+
+    // Create the schedule
+    ArrayList<Day> adminDays = Day.getAllDays();
+    ArrayList<DaySchedule> adminDaySchedules = new ArrayList<DaySchedule>();
+    for (Day day : adminDays)
+      adminDaySchedules.add(new DaySchedule(day, 1, 24));
+    Schedule adminSchedule = new Schedule(LocalDate.of(2024, 1, 1), LocalDate.of(2100, 12, 31), adminDaySchedules);
+
+    // Create the user group
+    UserGroup admin = new UserGroup("admin", adminSchedule);
+
+    // Add the users
     users.add(new User("Ana", "11343", admin));
   }
 

@@ -4,29 +4,34 @@ import java.util.ArrayList;
 
 public class UserGroup {
 
-    //TODO: Add the root area.
-
     private final String id;
+    private final Schedule schedule;
     private ArrayList<User> users = new ArrayList<User>();
 
     /**
-     * Create a new user group with an id.
+     * Create a new user group with an id and a schedule.
      *
      * @param id The id of the user group
+     * @param schedule The schedule of the user group
      */
-    public UserGroup(String id) {
+    public UserGroup(String id, Schedule schedule) {
         this.id = id;
+        this.schedule = schedule;
     }
 
     /**
-     * Create a new user group with an id and a user.
+     * Create a new user group with an id, a schedule and a user.
      *
      * @param id The id of the user group
+     * @param schedule The schedule of the user group
      * @param users The users to add
      */
-    public UserGroup(String id, User... users) {
+    public UserGroup(String id, Schedule schedule, User... users) {
         // Set the id of the user group
         this.id = id;
+
+        // Set the schedule of the user group
+        this.schedule = schedule;
 
         // Add the users to the group
         for (User user : users)

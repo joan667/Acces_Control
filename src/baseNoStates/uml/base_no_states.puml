@@ -221,9 +221,10 @@ DirectoryUserGroups --> "*" UserGroup : "userGroups"
 
 class UserGroup {
 - id : String
+- schedule : Schedule
 - users : User[]
-+ UserGroup(id : String)
-+ UserGroup(id : String, ...users : User[])
++ UserGroup(id : String, schedule : Schedule)
++ UserGroup(id : String, schedule : Schedule, ...users : User[])
 + addUser(user : User)
 + removeUser(user : User)
 + getUsers() : User[]
@@ -246,6 +247,46 @@ class User {
 
 User --> UserGroup : "group"
 
+class Day {
++ Monday : Int
++ Tuesday : Int
++ Wednesday : Int
++ Thursday : Int
++ Friday : Int
++ Saturday : Int
++ Sunday : Int
++ Day(day : Int)
++ getWeekDays() : Day[]
++ getWeekendDays() : Day[]
++ getAllDays() : Day[]
++ getDay() : Int
+}
+
+class DaySchedule {
+- day : Day
+- start : Int
+- end : Int
++ DaySchedule(day : Day, start : Int, end : Int)
++ isInSchedule(datetime : LocalDateTime) : boolean
++ getDay() : Day
++ getStart() : Int
++ getEnd() : Int
+}
+
+DaySchedule --> Day : "day"
+
+class Schedule {
++ start : LocalDate
++ end : LocalDate
++ daySchedules : DaySchedule[]
++ Schedule(start : LocalDate, end : LocalDate)
++ Schedule(start : LocalDate, end : LocalDate, daySchedules : DaySchedule[])
++ add(daySchedule : DaySchedule)
++ isInSchedule(datetime : LocalDateTime) : boolean
+}
+
+Schedule --> "*" DaySchedule : "daySchedules"
+UserGroup --> Schedule : "schedule"
 
 
 Main -[hidden]down- DirectoryAreas
