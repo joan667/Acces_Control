@@ -184,13 +184,17 @@ class UserGroup {
 - schedule : Schedule
 - users : User[]
 - areas : Area[]
+- actions : String[]
 + UserGroup(id : String, schedule : Schedule)
 + UserGroup(id : String, schedule : Schedule, ...users : User[])
 + addUser(user : User)
 + removeUser(user : User)
 + addArea(area : Area)
 + removeArea(area : Area)
++ addAction(action : String)
++ removeAction(action : String)
 + hasAccess(space : Space) : boolean
++ canPerform(action : String) : boolean
 + getUsers() : User[]
 }
 
@@ -204,6 +208,7 @@ class User {
 + User(name : String, credential : String)
 + User(name : String, credential : String, group : UserGroup)
 + hasAccess(space : Space) : boolean
++ canPerform(action : String) : boolean
 + setGroup(group : UserGroup)
 + getName() : String
 + getCredential() : String

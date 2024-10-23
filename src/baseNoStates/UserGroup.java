@@ -1,6 +1,7 @@
 package baseNoStates;
 
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class UserGroup {
 
@@ -174,7 +175,13 @@ public class UserGroup {
      * @return True if the group has access to the action, false otherwise
      */
     public boolean canPerform(String action) {
-        return actions.contains(action);
+        // Check if the action is not in the list
+        if (!actions.contains(action))
+            return false;
+
+        // Check if the user can perform the action at the current time
+        LocalDateTime now = LocalDateTime.now();
+        return schedule.isInSchedule(now);
     }
 
     /**
