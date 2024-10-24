@@ -63,28 +63,19 @@ public class Door {
     private void doAction(String action) {
         switch (action) {
             case Actions.OPEN:
-                // TODO: Open if is closed and is unlocked.
-                //if (closed) closed = false;
-                //else System.out.println("Can't open door " + id + " because it's already open");
                 doorState.open();
                 break;
             case Actions.CLOSE:
-                // TODO: Close if is open.
-                //if (!closed) closed = true;
-                //else System.out.println("Can't close door " + id + " because it's already closed");
                 doorState.close();
                 break;
             case Actions.LOCK:
-                // TODO: Lock if is unlocked and closed. The user must be authorized.
                 doorState.lock();
                 break;
             case Actions.UNLOCK:
-                // TODO: Unlock if is locked and closed. The user must be authorized.
                 doorState.unlock();
                 break;
             case Actions.UNLOCK_SHORTLY:
-                // TODO: Unlock shortly if is locked and closed. The user must be authorized. The door will lock again after a short time.
-                System.out.println("Action " + action + " not implemented yet");
+                doorState.unlockShortly();
                 break;
             default:
                 throw new IllegalArgumentException("Invalid action: \"" + action + "\"");

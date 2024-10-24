@@ -137,6 +137,7 @@ abstract class DoorState {
 + close()
 + lock()
 + unlock()
++ unlockShortly()
 + getStateName() : String
 }
 
@@ -145,47 +146,80 @@ DoorState --> Door : "door"
 static class States {
 - {static} LOCKED : String
 - {static} UNLOCKED : String
-- {static} UNLOCKED_SHORTLY : String
 - {static} PROPPED : String
+- {static} UNLOCKED_SHORTLY : String
 }
 
 class LockedState extends DoorState {
 + LockedState(door : Door)
 + open()
-+ close()
 + lock()
-+ unlock()
 }
 
 class UnlockedState extends DoorState {
 + UnlockedState(door : Door)
-+ open()
-+ close()
-+ lock()
-+ unlock()
-}
-
-class UnlockedShortlyState extends DoorState {
-+ UnlockedShortlyState(door : Door)
-+ open()
-+ close()
-+ lock()
 + unlock()
 }
 
 class ProppedState extends DoorState {
 + ProppedState(door : Door)
-+ open()
 + close()
 + lock()
+}
+
+interface Observerable {
++ update()
+}
+
+class UnlockedShortlyState extends DoorState implements Observerable {
++ UnlockedShortlyState(door : Door)
++ update()
++ lock()
 + unlock()
++ unlockShortly()
+- startTimer()
+- resetTimer()
+- stopTimer()
 }
 
 LockedState --> States : name
 UnlockedState --> States : name
-UnlockedShortlyState --> States : name
 ProppedState --> States : name
+UnlockedShortlyState --> States : name
 
+interface TimedEvent {
++ isExpired() : boolean
++ notifyExpired()
+}
+
+class Clock implements TimedEvent {
+- endTime : Long
+- observerable : Observerable
++ Clock(endTime : Long, observerable : Observerable)
++ isExpired() : Boolean
++ notifyExpired()
++ reset(millis : Int)
++ stop()
++ cancel()
+}
+
+Clock --> Observerable : "observerable"
+UnlockedShortlyState --> Clock : "clock"
+
+class Observer {
+- instance : Observer
+- timedEvents : TimedEvent[]
+- running : Boolean
++ Observer()
++ getInstance() : Observer
++ addTimedEvent(timedEvent : TimedEvent)
++ removeTimedEvent(timedEvent : TimedEvent)
++ run()
++ stop()
+}
+
+Observer --> Observer : "instance"
+Clock --> Observer : "getInstance()"
 
 static class DirectoryUserGroups {
 - {static} userGroups : UserGroup[]
