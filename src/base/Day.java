@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public final class Day {
 
-    public final static int Monday = 1;
-    public final static int Tuesday = 2;
-    public final static int Wednesday = 3;
-    public final static int Thursday = 4;
-    public final static int Friday = 5;
-    public final static int Saturday = 6;
-    public final static int Sunday = 7;
+    public final static int MONDAY = 1;
+    public final static int TUESDAY = 2;
+    public final static int WEDNESDAY = 3;
+    public final static int THURSDAY = 4;
+    public final static int FRIDAY = 5;
+    public final static int SATURDAY = 6;
+    public final static int SUNDAY = 7;
 
     private final int day;
 
@@ -31,11 +31,11 @@ public final class Day {
      */
     public static ArrayList<Day> getWeekDays() {
         ArrayList<Day> weekDays = new ArrayList<Day>();
-        weekDays.add(new Day(Monday));
-        weekDays.add(new Day(Tuesday));
-        weekDays.add(new Day(Wednesday));
-        weekDays.add(new Day(Thursday));
-        weekDays.add(new Day(Friday));
+        weekDays.add(new Day(MONDAY));
+        weekDays.add(new Day(TUESDAY));
+        weekDays.add(new Day(WEDNESDAY));
+        weekDays.add(new Day(THURSDAY));
+        weekDays.add(new Day(FRIDAY));
         return weekDays;
     }
 
@@ -46,8 +46,8 @@ public final class Day {
      */
     public static ArrayList<Day> getWeekendDays() {
         ArrayList<Day> weekendDays = new ArrayList<Day>();
-        weekendDays.add(new Day(Saturday));
-        weekendDays.add(new Day(Sunday));
+        weekendDays.add(new Day(SATURDAY));
+        weekendDays.add(new Day(SUNDAY));
         return weekendDays;
     }
 
@@ -58,13 +58,13 @@ public final class Day {
      */
     public static ArrayList<Day> getAllDays() {
         ArrayList<Day> allDays = new ArrayList<Day>();
-        allDays.add(new Day(Monday));
-        allDays.add(new Day(Tuesday));
-        allDays.add(new Day(Wednesday));
-        allDays.add(new Day(Thursday));
-        allDays.add(new Day(Friday));
-        allDays.add(new Day(Saturday));
-        allDays.add(new Day(Sunday));
+        allDays.add(new Day(MONDAY));
+        allDays.add(new Day(TUESDAY));
+        allDays.add(new Day(WEDNESDAY));
+        allDays.add(new Day(THURSDAY));
+        allDays.add(new Day(FRIDAY));
+        allDays.add(new Day(SATURDAY));
+        allDays.add(new Day(SUNDAY));
         return allDays;
     }
 

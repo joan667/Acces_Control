@@ -52,7 +52,7 @@ public final class DirectoryUserGroups {
 
     // Create the schedule
     ArrayList<Day> managersDays = Day.getWeekDays();
-    managersDays.add(new Day(Day.Saturday));
+    managersDays.add(new Day(Day.SATURDAY));
     ArrayList<DaySchedule> managersDaySchedules = new ArrayList<DaySchedule>();
     for (Day day : managersDays)
       managersDaySchedules.add(new DaySchedule(day, 8, 20));

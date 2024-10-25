@@ -273,13 +273,14 @@ class User {
 User --> UserGroup : "group"
 
 class Day {
-+ Monday : Int
-+ Tuesday : Int
-+ Wednesday : Int
-+ Thursday : Int
-+ Friday : Int
-+ Saturday : Int
-+ Sunday : Int
++ MONDAY : Int
++ TUESDAY : Int
++ WEDNESDAY : Int
++ THURSDAY : Int
++ FRIDAY : Int
++ SATURDAY : Int
++ SUNDAY : Int
+- day : Int
 + Day(day : Int)
 + getWeekDays() : Day[]
 + getWeekendDays() : Day[]
