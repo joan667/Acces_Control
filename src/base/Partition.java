@@ -2,8 +2,8 @@ package base;
 import java.util.ArrayList;
 
 public class Partition extends Area {
-    private ArrayList<Partition> partitions = new ArrayList<Partition>();
-    private ArrayList<Space> spaces = new ArrayList<Space>();
+
+    private ArrayList<Area> areas = new ArrayList<Area>();
 
     /**
      * Create a new partition with an id.
@@ -32,7 +32,7 @@ public class Partition extends Area {
      */
     public void addPartition(Partition partition) {
         // Check if the partition is already added
-        if (partitions.contains(partition))
+        if (this.getPartitions().contains(partition))
             throw new IllegalArgumentException("Partition already exists in partition");
 
         // Check if the partition is the same as this partition
@@ -40,7 +40,7 @@ public class Partition extends Area {
             throw new IllegalArgumentException("Partition cannot contain itself");
 
         // Add the partition to the partition
-        partitions.add(partition);
+        areas.add(partition);
 
         // Add the partition to the partition if not already added
         if (!partition.parents.contains(this))
@@ -55,11 +55,11 @@ public class Partition extends Area {
      */
     public void addSpace(Space space) {
         // Check if the space is already added
-        if (spaces.contains(space))
+        if (this.getSpaces().contains(space))
             throw new IllegalArgumentException("Space already exists in partition");
 
         // Add the space to the partition
-        spaces.add(space);
+        areas.add(space);
 
         // Add the partition to the space if not already added
         if (!space.parents.contains(this))
@@ -95,6 +95,15 @@ public class Partition extends Area {
      * @return The partitions in the partition
      */
     public ArrayList<Partition> getPartitions() {
+        // Init partitions
+        ArrayList<Partition> partitions = new ArrayList<Partition>();
+
+        // Loop through all the areas
+        for (Area area : areas)
+            if (area instanceof Partition)
+                partitions.add((Partition) area);
+
+        // Return the list of partitions
         return partitions;
     }
 
@@ -104,11 +113,16 @@ public class Partition extends Area {
      * @return The spaces in the partition
      */
     public ArrayList<Space> getSpaces() {
-        // Get the spaces in the partition
-        ArrayList<Space> spaces = this.spaces;
+        // Init spaces
+        ArrayList<Space> spaces = new ArrayList<Space>();
+
+        // Loop through all the areas
+        for (Area area : areas)
+            if (area instanceof Space)
+                spaces.add((Space) area);
 
         // Loop through all partitions to get the spaces
-        for (Partition partition : partitions) {
+        for (Partition partition : this.getPartitions()) {
 
             // Get the spaces in the partition
             ArrayList<Space> partitionSpaces = partition.getSpaces();

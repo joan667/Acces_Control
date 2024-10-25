@@ -34,8 +34,8 @@ public final class DirectoryUserGroups {
     UserGroup employees = new UserGroup("employees", employeesSchedule);
     employees.addActions(Actions.OPEN, Actions.CLOSE, Actions.UNLOCK_SHORTLY);
     employees.addAreas(
-      DirectoryAreas.findAreaById("ground floor"),
-      DirectoryAreas.findAreaById("floor 1"),
+      DirectoryAreas.findAreaById("ground_floor"),
+      DirectoryAreas.findAreaById("floor1"),
       DirectoryAreas.findAreaById("exterior"),
       DirectoryAreas.findAreaById("stairs"));
     userGroups.add(employees);

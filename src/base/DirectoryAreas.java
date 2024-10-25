@@ -161,18 +161,18 @@ public final class DirectoryAreas  {
     // Initialize the areas and doors
     Partition building    = new Partition("building");
     Partition basement    = new Partition("basement",     building);
-    Partition groundFloor = new Partition("ground floor", building);
-    Partition floor1      = new Partition("floor 1",      building);
+    Partition groundFloor = new Partition("ground_floor", building);
+    Partition floor1      = new Partition("floor1",      building);
     partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1));
 
     // Initialize the spaces
     Space parking  = new Space("parking",  basement);
-    Space exterior = new Space("exterior", basement);
-    Space stairs   = new Space("stairs",   basement, groundFloor, floor1);
+    Space exterior = new Space("exterior", building);
+    Space stairs   = new Space("stairs",   building);
     Space hall     = new Space("hall",     groundFloor);
-    Space room1    = new Space("room 1",   groundFloor);
-    Space room2    = new Space("room 2",   groundFloor);
-    Space room3    = new Space("room 3",   floor1);
+    Space room1    = new Space("room_1",   groundFloor);
+    Space room2    = new Space("room_2",   groundFloor);
+    Space room3    = new Space("room_3",   floor1);
     Space corridor = new Space("corridor", floor1);
     Space it       = new Space("IT",       floor1);
     spaces = new ArrayList<Space>(Arrays.asList(parking, exterior, stairs, hall, room1, room2, room3, corridor, it));
