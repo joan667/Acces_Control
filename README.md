@@ -11,6 +11,8 @@
 
 - [Introduction](#introduction)
 - [What's included](#whats-included)
+    - [Scheme](#whats-included)
+    - [UML](#uml)
 - [Installation](#installation)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
@@ -33,6 +35,11 @@ Within the download you'll find the following directories and files:
 root/
 ├── src/
 │   ├── baseNoStates/
+│   │   ├── doorStates/
+│   │   │   ├── LockedState.java
+│   │   │   ├── ProppedState.java
+│   │   │   ├── UnlockedShortlyState.java
+│   │   │   └── UnlockedState.java
 │   │   ├── requests/
 │   │   │   ├── Request.java
 │   │   │   ├── RequestArea.java
@@ -44,14 +51,24 @@ root/
 │   │   │   ├── package_requests.png
 │   │   │   └── package_requests.puml
 │   │   ├── Actions.java
-│   │   ├── DirectoryDoors.java
-│   │   ├── DirectoryUsers.java
+│   │   ├── Area.java
+│   │   ├── Clock.java
+│   │   ├── Day.java
+│   │   ├── DaySchedule.java
+│   │   ├── DirectoryAreas.java
+│   │   ├── DirectoryUserGroups.java
 │   │   ├── Door.java
 │   │   ├── DoorState.java
-│   │   ├── LockedDoor.java
 │   │   ├── Main.java
-│   │   ├── UnlockedDoor.java
+│   │   ├── Observer.java
+│   │   ├── Observerable.java
+│   │   ├── Partition.java
+│   │   ├── Schedule.java
+│   │   ├── Space.java
+│   │   ├── States.java
+│   │   ├── TimedEvent.java
 │   │   ├── User.java
+│   │   ├── UserGroup.java
 │   │   └── WebServer.java
 │   └── simulator/
 │       ├── images/
@@ -60,6 +77,11 @@ root/
 ├── LICENSE
 └── README.md
 ```
+
+### UML
+The following UML diagram, shows how all the classes are connected and how it works.
+
+![UML Diagram](src/baseNoStates/uml/base_no_states.png)
 
 ## Installation
 To run this project, you need some [prerequisites](#prerequisites) that you can find below, and you need to follow the [setup](#setup) steps.
@@ -87,7 +109,11 @@ Add the JSON library to the project. You can do it in `File -> Project Structure
 Open the project in IntelliJ IDEA and add the `src` folder as a source folder. You can do it in `File -> Project Structure -> Modules -> Sources -> Add Content Root`.
 
 ## Usage
-[...]
+To execute the project, you need to:
+
+1. Open the Main class file (`src/baseNoStates/Main.java`).
+2. Execute it pressing the green play button (top right corner).
+3. Open the link shown in the terminal.
 
 ## Creators
 This project was developed by Software Design teachers at UAB, that have made the base code available for students to work on it.
