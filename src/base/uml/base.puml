@@ -47,8 +47,7 @@ Main -[hidden]down- Webserver
 
 static class DirectoryAreas {
 - {static} rootArea : Area
-- {static} partitions : Partition[]
-- {static} spaces : Space[]
+- {static} areas : Area[]
 - {static} doors : Door[]
 + {static} importAreas(filename : String)
 + {static} makeAreas()
@@ -62,8 +61,7 @@ static class DirectoryAreas {
 
 Main --> DirectoryAreas : "makeAreas"
 DirectoryAreas --> Area : "rootArea"
-DirectoryAreas --> "*" Partition : "partitions"
-DirectoryAreas --> "*" Space : "spaces"
+DirectoryAreas --> "*" Area : "areas"
 DirectoryAreas --> "*" Door : "doors"
 
 abstract class Area {
@@ -80,8 +78,7 @@ abstract class Area {
 Area --> "*" Partition : "parents"
 
 class Partition extends Area {
-- partitions : Partition[]
-- spaces : Space[]
+- areas : Area[]
 + Partition(id : String)
 + Partition(id : String, ...parents : Partition[])
 + addPartition(partition : Partition)
@@ -92,8 +89,8 @@ class Partition extends Area {
 + getDoors() : Door[]
 }
 
-Partition --> "*" Partition : "partitions"
-Partition --> "*" Space : "spaces"
+Partition --> "*" Area : "areas"
+Partition -[hidden]up- Area
 
 class Space extends Area {
 - doors : Door[]
@@ -159,6 +156,7 @@ class LockedState extends DoorState {
 class UnlockedState extends DoorState {
 + UnlockedState(door : Door)
 + unlock()
++ unlockShortly()
 }
 
 class ProppedState extends DoorState {
@@ -254,6 +252,16 @@ class UserGroup {
 
 UserGroup --> "*" User : "users"
 UserGroup --> "*" Area : "areas"
+
+class Actions {
+- {static} OPEN : String
+- {static} CLOSE : String
+- {static} LOCK : String
+- {static} UNLOCK : String
+- {static} UNLOCK_SHORTLY : String
+}
+
+UserGroup --> Actions : "canPerform()"
 
 class User {
 - name : String

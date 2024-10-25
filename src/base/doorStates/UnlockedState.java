@@ -22,4 +22,11 @@ public final class UnlockedState extends DoorState {
         System.out.println("The door is already unlocked");
     }
 
+    /**
+     * The actions that will be done in the state when the door is unlocked shortly.
+     */
+    public void unlockShortly() {
+        System.out.println("The door needs to be locked first");
+    }
+
 }

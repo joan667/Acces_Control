@@ -11,8 +11,7 @@ import org.json.JSONObject;
 
 public final class DirectoryAreas  {
   private static Area rootArea;
-  private static ArrayList<Partition> partitions = new ArrayList<Partition>();
-  private static ArrayList<Space> spaces = new ArrayList<Space>();
+  private static ArrayList<Area> areas = new ArrayList<Area>();
   private static ArrayList<Door> doors = new ArrayList<Door>();
 
   /**
@@ -37,6 +36,10 @@ public final class DirectoryAreas  {
    * @param filename The name of the file to import
    */
   public static void importAreas(String filename) {
+    // Initialize the partitions and spaces
+    ArrayList<Partition> partitions = new ArrayList<Partition>();
+    ArrayList<Space> spaces = new ArrayList<Space>();
+
     // Read the file content
     String content;
     try {
@@ -136,6 +139,10 @@ public final class DirectoryAreas  {
         doors.add(door);
       }
     }
+    // Add all the areas to the list
+    areas.addAll(partitions);
+    areas.addAll(spaces);
+
     // Check if root area is not defined
     if (!json.has("root"))
       throw new IllegalArgumentException("Root area not found");
@@ -163,19 +170,23 @@ public final class DirectoryAreas  {
     Partition basement    = new Partition("basement",     building);
     Partition groundFloor = new Partition("ground_floor", building);
     Partition floor1      = new Partition("floor1",      building);
-    partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1));
+    ArrayList<Partition> partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1));
 
     // Initialize the spaces
     Space parking  = new Space("parking",  basement);
     Space exterior = new Space("exterior", building);
     Space stairs   = new Space("stairs",   building);
     Space hall     = new Space("hall",     groundFloor);
-    Space room1    = new Space("room_1",   groundFloor);
-    Space room2    = new Space("room_2",   groundFloor);
-    Space room3    = new Space("room_3",   floor1);
+    Space room1    = new Space("room1",   groundFloor);
+    Space room2    = new Space("room2",   groundFloor);
+    Space room3    = new Space("room3",   floor1);
     Space corridor = new Space("corridor", floor1);
     Space it       = new Space("IT",       floor1);
-    spaces = new ArrayList<Space>(Arrays.asList(parking, exterior, stairs, hall, room1, room2, room3, corridor, it));
+    ArrayList<Space> spaces = new ArrayList<Space>(Arrays.asList(parking, exterior, stairs, hall, room1, room2, room3, corridor, it));
+
+    // Initialize the areas
+    areas.addAll(partitions);
+    areas.addAll(spaces);
 
     // Initialize the doors
     Door d1 = new Door("D1", parking,  exterior);
@@ -201,15 +212,10 @@ public final class DirectoryAreas  {
    * @throws IllegalArgumentException If the area is not found
    */
   public static Area findAreaById(String id) {
-    // Loop through all partitions to find it
-    for (Partition partition : partitions)
-      if (partition.getId().equals(id))
-        return partition;
-
-    // Loop through all spaces to find it
-    for (Space space : spaces)
-      if (space.getId().equals(id))
-        return space;
+    // Loop through all areas to find it
+    for (Area area : areas)
+      if (area.getId().equals(id))
+        return area;
 
     // Throw error if not found
     throw new IllegalArgumentException("Area with id \"" + id + "\" not found");
@@ -247,6 +253,15 @@ public final class DirectoryAreas  {
    * @return The list of all partitions
    */
   public static ArrayList<Partition> getAllPartitions() {
+    // Init partitions
+    ArrayList<Partition> partitions = new ArrayList<Partition>();
+
+    // Loop through all the areas
+    for (Area area : areas)
+      if (area instanceof Partition)
+        partitions.add((Partition) area);
+
+    // Return the list of partitions
     return partitions;
   }
 
@@ -256,6 +271,15 @@ public final class DirectoryAreas  {
    * @return The list of all spaces
    */
   public static ArrayList<Space> getAllSpaces() {
+    // Init spaces
+    ArrayList<Space> spaces = new ArrayList<Space>();
+
+    // Loop through all the areas
+    for (Area area : areas)
+      if (area instanceof Space)
+        spaces.add((Space) area);
+
+    // Return the list of spaces
     return spaces;
   }
 
