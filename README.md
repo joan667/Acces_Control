@@ -34,7 +34,7 @@ Within the download you'll find the following directories and files:
 ```text
 root/
 ├── src/
-│   ├── baseNoStates/
+│   ├── base/
 │   │   ├── doorStates/
 │   │   │   ├── LockedState.java
 │   │   │   ├── ProppedState.java
@@ -46,8 +46,8 @@ root/
 │   │   │   ├── RequestReader.java
 │   │   │   └── RequestRefresh.java
 │   │   ├── uml/
-│   │   │   ├── base_no_states.png
-│   │   │   ├── base_no_states.puml
+│   │   │   ├── base.png
+│   │   │   ├── base.puml
 │   │   │   ├── package_requests.png
 │   │   │   └── package_requests.puml
 │   │   ├── Actions.java
@@ -81,7 +81,7 @@ root/
 ### UML
 The following UML diagram, shows how all the classes are connected and how it works.
 
-![UML Diagram](src/baseNoStates/uml/base_no_states.png)
+![UML Diagram](src/base/uml/base.png)
 
 ## Installation
 To run this project, you need some [prerequisites](#prerequisites) that you can find below, and you need to follow the [setup](#setup) steps.
@@ -111,7 +111,7 @@ Open the project in IntelliJ IDEA and add the `src` folder as a source folder. Y
 ## Usage
 To execute the project, you need to:
 
-1. Open the Main class file (`src/baseNoStates/Main.java`).
+1. Open the Main class file (`src/base/Main.java`).
 2. Execute it pressing the green play button (top right corner).
 3. Open the link shown in the terminal.
 
