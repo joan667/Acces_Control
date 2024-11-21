@@ -2,11 +2,17 @@ package base;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * A class that represents a user group.
  */
 public class UserGroup {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.UserGroup");
 
   private final String id;
   private final Schedule schedule;
@@ -17,32 +23,31 @@ public class UserGroup {
   /**
    * Create a new user group with an id and a schedule.
    *
-   * @param id The id of the user group
+   * @param id       The id of the user group
    * @param schedule The schedule of the user group
    */
   public UserGroup(String id, Schedule schedule) {
+    logger.info("Creating user group with id: {}", id);
     this.id = id;
     this.schedule = schedule;
+    logger.info("User group created successfully with id: {}", id);
   }
 
   /**
-   * Create a new user group with an id, a schedule and a user.
+   * Create a new user group with an id, a schedule, and users.
    *
-   * @param id The id of the user group
+   * @param id       The id of the user group
    * @param schedule The schedule of the user group
-   * @param users The users to add
+   * @param users    The users to add
    */
   public UserGroup(String id, Schedule schedule, User... users) {
-    // Set the id of the user group
+    logger.info("Creating user group with id: {} and adding initial users.", id);
     this.id = id;
-
-    // Set the schedule of the user group
     this.schedule = schedule;
-
-    // Add the users to the group
     for (User user : users) {
       addUser(user);
     }
+    logger.info("User group created successfully with id: {}", id);
   }
 
   /**
@@ -52,19 +57,19 @@ public class UserGroup {
    * @throws IllegalArgumentException If the user is already in the group
    */
   public void addUser(User user) {
-    // Check if the user is already added
+    logger.debug("Attempting to add user: {} to group: {}", user.getName(), id);
     if (users.contains(user)) {
+      logger.warn("User: {} is already in group: {}", user.getName(), id);
       throw new IllegalArgumentException("User already exists in group");
     }
-
-    // Check if the user is already in another group and change it
     if (user.getGroup() != this) {
+      logger.info("User: {} belongs to another group. Reassigning to group: {}",
+          user.getName(), id);
       user.setGroup(this);
       return;
     }
-
-    // Add the user to the group list
     users.add(user);
+    logger.info("User: {} added successfully to group: {}", user.getName(), id);
   }
 
   /**
@@ -74,13 +79,13 @@ public class UserGroup {
    * @throws IllegalArgumentException If the user does not exist in the group
    */
   public void removeUser(User user) {
-    // Check if the user is in the group
+    logger.debug("Attempting to remove user: {} from group: {}", user.getName(), id);
     if (!users.contains(user)) {
+      logger.warn("User: {} does not exist in group: {}", user.getName(), id);
       throw new IllegalArgumentException("User does not exist in group");
     }
-
-    // Remove the user from the group list
     users.remove(user);
+    logger.info("User: {} removed successfully from group: {}", user.getName(), id);
   }
 
   /**
@@ -90,13 +95,13 @@ public class UserGroup {
    * @throws IllegalArgumentException If the area is already in the group
    */
   public void addArea(Area area) {
-    // Check if the area is already added
+    logger.debug("Attempting to add area to group: {}", id);
     if (areas.contains(area)) {
+      logger.warn("Area already exists in group: {}", id);
       throw new IllegalArgumentException("Area already exists in group");
     }
-
-    // Add the area to the group list
     areas.add(area);
+    logger.info("Area added successfully to group: {}", id);
   }
 
   /**
@@ -105,7 +110,6 @@ public class UserGroup {
    * @param areas The areas to add
    */
   public void addAreas(Area... areas) {
-    // Loop through all areas
     for (Area area : areas) {
       addArea(area);
     }
@@ -115,21 +119,20 @@ public class UserGroup {
    * Add an action to the group.
    *
    * @param action The action to add
-   * @throws IllegalArgumentException If the action is already in the group
+   * @throws IllegalArgumentException If the action is already in the group or invalid
    */
   public void addAction(String action) {
-    // Check if the action is already added
+    logger.debug("Attempting to add action: {} to group: {}", action, id);
     if (actions.contains(action)) {
+      logger.warn("Action: {} already exists in group: {}", action, id);
       throw new IllegalArgumentException("Action already exists in group");
     }
-
-    // Check if the action is valid
     if (!Actions.getActions().contains(action)) {
+      logger.error("Action: {} is not valid for group: {}", action, id);
       throw new IllegalArgumentException("Action is not valid");
     }
-
-    // Add the action to the group list
     actions.add(action);
+    logger.info("Action: {} added successfully to group: {}", action, id);
   }
 
   /**
@@ -138,7 +141,6 @@ public class UserGroup {
    * @param actions The actions to add
    */
   public void addActions(String... actions) {
-    // Loop through all actions
     for (String action : actions) {
       addAction(action);
     }
@@ -151,52 +153,49 @@ public class UserGroup {
    * @return True if the group has access to the space, false otherwise
    */
   public boolean hasAccess(Space space) {
-    // Loop through all areas
+    logger.debug("Checking access to space: {} for group: {}", space.getId(), id);
     for (Area area : areas) {
-
-      // Check if the area is a space and if it is the same space
-      if (area instanceof Space) {
-        if (area.equals(space)) {
-          return true;
-        }
-
-        // Check if the area is a partition and if it contains the space
+      if (area instanceof Space && area.equals(space)) {
+        logger.info("Group: {} has access to space: {}", id, space.getId());
+        return true;
       } else if (area instanceof Partition) {
-        ArrayList<Space> spaces = ((Partition) area).getSpaces();
-        if (spaces.contains(space)) {
+        if (((Partition) area).getSpaces().contains(space)) {
+          logger.info("Group: {} has access to space: {} through partition.", id, space.getId());
           return true;
         }
       }
     }
-
-    // If the group does not have access to the space, return false
+    logger.info("Group: {} does not have access to space: {}", id, space.getId());
     return false;
   }
 
   /**
    * Check if the group has access to a specific action in the current time.
    *
-   * @param action The action to check
+   * @param action   The action to check
    * @param datetime The date and time to check
    * @return True if the group has access to the action, false otherwise
    */
   public boolean canPerform(String action, LocalDateTime datetime) {
-    // Check if the action is not in the list
+    logger.debug("Checking if group: {} can perform action: {} at datetime: {}",
+        id, action, datetime);
     if (!actions.contains(action)) {
+      logger.info("Group: {} cannot perform action: {}. Action not allowed.", id, action);
       return false;
     }
-
-    // Check if the user can perform the action at the current time
-    return schedule.isInSchedule(datetime);
+    boolean inSchedule = schedule.isInSchedule(datetime);
+    logger.info("Action check for group: {} to perform: {} at datetime: {} resulted in: {}",
+        id, action, datetime, inSchedule);
+    return inSchedule;
   }
 
   /**
-   * Get the users in the group.
+   * Get the ID of the group.
    *
-   * @return The users in the group
+   * @return The ID of the group
    */
-  @SuppressWarnings("unused")   // This method is not used in the current version of the project
   public String getId() {
+    logger.debug("Fetching ID for group: {}", id);
     return id;
   }
 
@@ -205,8 +204,8 @@ public class UserGroup {
    *
    * @return The users in the group
    */
-  @SuppressWarnings("unused")   // This method is not used in the current version of the project
   public ArrayList<User> getUsers() {
+    logger.debug("Fetching users for group: {}", id);
     return users;
   }
 }

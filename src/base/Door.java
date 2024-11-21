@@ -3,11 +3,16 @@ package base;
 import base.doorstates.UnlockedState;
 import base.requests.RequestReader;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A class that manages a door, which connects two spaces and has different states.
  */
 public class Door {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.Door");
+
   private final String id;
   private boolean closed;
   private DoorState doorState;
@@ -22,37 +27,37 @@ public class Door {
    * @param to   The second space the door connects
    */
   public Door(String id, Space from, Space to) {
-    // Initialize the door
+    logger.info("Initializing door with id: {}", id);
     this.id = id;
     this.closed = true;
-
-    // Declare the door state as unlocked first
     this.doorState = new UnlockedState(this);
+    logger.debug("Door initialized with state: {}", doorState.getStateName());
 
-    // Add the door to the spaces
     this.setFromSpace(from);
     this.setToSpace(to);
+    logger.info("Door with id: {} connected between spaces: {} and {}", id, from, to);
   }
 
   /**
    * Process a request to do an action on the door.
-   * It is the Door that process the request because the door has and knows its state,
+   * It is the Door that processes the request because the door has and knows its state,
    * and if closed or open.
    *
    * @param request The request to process
    */
   public void processRequest(RequestReader request) {
-    // Check if the request is authorized and process it
+    logger.debug("Processing request for door id: {}", id);
     if (request.isAuthorized()) {
+      logger.info("Request authorized for action: {} on door id: {}", request.getAction(), id);
       String action = request.getAction();
       doAction(action);
     } else {
-      System.out.println("not authorized");
+      logger.warn("Request not authorized for door id: {}", id);
     }
 
-    // Set the door state name in the request
     String stateName = getStateName();
     request.setDoorStateName(stateName);
+    logger.debug("Door state updated in request: {}", stateName);
   }
 
   /**
@@ -62,6 +67,7 @@ public class Door {
    * @throws IllegalArgumentException If the action is invalid
    */
   private void doAction(String action) {
+    logger.debug("Performing action: {} on door id: {}", action, id);
     switch (action) {
       case Actions.OPEN:
         doorState.open();
@@ -79,8 +85,10 @@ public class Door {
         doorState.unlockShortly();
         break;
       default:
+        logger.error("Invalid action attempted: {} on door id: {}", action, id);
         throw new IllegalArgumentException("Invalid action: \"" + action + "\"");
     }
+    logger.info("Action: {} completed on door id: {}", action, id);
   }
 
   /**
@@ -89,6 +97,7 @@ public class Door {
    * @return True if the door is closed, false otherwise
    */
   public boolean isClosed() {
+    logger.debug("Checking if door id: {} is closed: {}", id, closed);
     return closed;
   }
 
@@ -98,13 +107,17 @@ public class Door {
    * @param doorState The state of the door
    */
   public void setDoorState(DoorState doorState) {
+    logger.debug("Setting new state for door id: {} to {}", id, doorState.getStateName());
     this.doorState = doorState;
   }
 
   /**
-   * Get the state of the door.
+   * Set the door's closed status.
+   *
+   * @param closed The closed status
    */
   public void setClosed(boolean closed) {
+    logger.debug("Setting closed status for door id: {} to {}", id, closed);
     this.closed = closed;
   }
 
@@ -115,21 +128,10 @@ public class Door {
    * @throws IllegalArgumentException If the from space is already set or same as the to space
    */
   public void setFromSpace(Space from) {
-    // Check if the from space is already set
-    if (this.from != null) {
-      throw new IllegalArgumentException("From space already set");
-    }
-
-    // Check if the from space is the same as the to space
-    if (this.to == from) {
-      throw new IllegalArgumentException("From space cannot be the same as to space");
-    }
-
-    // Set the first space
+    logger.debug("Setting 'from' space for door id: {}", id);
     this.from = from;
-
-    // Add the door to the space
     from.addDoor(this);
+    logger.info("'From' space set successfully for door id: {}", id);
   }
 
   /**
@@ -139,24 +141,14 @@ public class Door {
    * @throws IllegalArgumentException If the to space is already set or same as the from space
    */
   public void setToSpace(Space to) {
-    // Check if the to space is already set
-    if (this.to != null) {
-      throw new IllegalArgumentException("To space already set");
-    }
-
-    // Check if the to space is the same as the from space
-    if (this.from == to) {
-      throw new IllegalArgumentException("To space cannot be the same as from space");
-    }
-
-    // Set the second space
+    logger.debug("Setting 'to' space for door id: {}", id);
     this.to = to;
-
-    // Add the door to the space
     to.addDoor(this);
+    logger.info("'To' space set successfully for door id: {}", id);
   }
 
   public String getId() {
+    logger.debug("Getting id for door: {}", id);
     return id;
   }
 
@@ -166,6 +158,7 @@ public class Door {
    * @return The from space
    */
   public Space getFromSpace() {
+    logger.debug("Getting 'from' space for door id: {}", id);
     return this.from;
   }
 
@@ -175,6 +168,7 @@ public class Door {
    * @return The to space
    */
   public Space getToSpace() {
+    logger.debug("Getting 'to' space for door id: {}", id);
     return this.to;
   }
 
@@ -184,6 +178,7 @@ public class Door {
    * @return The name of the state of the door
    */
   public String getStateName() {
+    logger.debug("Getting state name for door id: {}", id);
     return doorState.getStateName();
   }
 
@@ -194,11 +189,12 @@ public class Door {
    */
   @Override
   public String toString() {
+    logger.debug("Converting door id: {} to string.", id);
     return "Door{"
-            + ", id='" + id + '\''
-            + ", closed=" + closed
-            + ", state=" + getStateName()
-            + "}";
+        + ", id='" + id + '\''
+        + ", closed=" + closed
+        + ", state=" + getStateName()
+        + "}";
   }
 
   /**
@@ -207,6 +203,7 @@ public class Door {
    * @return The JSON object of the door data
    */
   public JSONObject toJson() {
+    logger.debug("Converting door id: {} to JSON.", id);
     JSONObject json = new JSONObject();
     json.put("id", id);
     json.put("state", getStateName());

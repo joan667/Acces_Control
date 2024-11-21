@@ -1,11 +1,17 @@
 package base;
 
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * A class that represents a user.
  */
 public class User {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.User");
 
   private final String name;
   private final String credential;
@@ -14,29 +20,29 @@ public class User {
   /**
    * Create a new user with a name and a credential.
    *
-   * @param name The name of the user
+   * @param name       The name of the user
    * @param credential The credential of the user
    */
   public User(String name, String credential) {
-    // Set the name and credential of the user
+    logger.info("Creating user with name: {} and credential: {}", name, credential);
     this.name = name;
     this.credential = credential;
+    logger.info("User created successfully with name: {} and credential: {}", name, credential);
   }
 
   /**
    * Create a new user with a name, a credential, and a group.
    *
-   * @param name The name of the user
+   * @param name       The name of the user
    * @param credential The credential of the user
-   * @param group The group of the user
+   * @param group      The group of the user
    */
   public User(String name, String credential, UserGroup group) {
-    // Set the name and credential of the user
+    logger.info("Creating user with name: {} and credential: {}", name, credential);
     this.name = name;
     this.credential = credential;
-
-    // Set the group of the user
     this.setGroup(group);
+    logger.info("User created successfully with name: {} and credential: {}.", name, credential);
   }
 
   /**
@@ -46,30 +52,35 @@ public class User {
    * @return True if the user has access to the space, false otherwise
    */
   public boolean hasAccess(Space space) {
-    // Check if the user is not in a group
+    logger.debug("Checking access for user: {} to space: {}", name, space.getId());
     if (group == null) {
+      logger.warn("User: {} does not belong to any group. Access denied.", name);
       return false;
     }
-
-    // Check if the user group has access to the space
-    return group.hasAccess(space);
+    boolean access = group.hasAccess(space);
+    logger.info("Access check for user: {} to space: {} resulted in: {}",
+        name, space.getId(), access);
+    return access;
   }
 
   /**
    * Check if the user has access to a specific action in the current time.
    *
-   * @param action The action to check
+   * @param action   The action to check
    * @param datetime The date and time to check
    * @return True if the user has access to the action, false otherwise
    */
   public boolean canPerform(String action, LocalDateTime datetime) {
-    // Check if the user is not in a group
+    logger.debug("Checking if user: {} can perform action: {} at datetime: {}",
+        name, action, datetime);
     if (group == null) {
+      logger.warn("User: {} does not belong to any group. Action denied.", name);
       return false;
     }
-
-    // Check if the user group has access to the action
-    return group.canPerform(action, datetime);
+    boolean canPerform = group.canPerform(action, datetime);
+    logger.info("Action check for user: {} to perform: {} at datetime: {} resulted in: {}",
+        name, action, datetime, canPerform);
+    return canPerform;
   }
 
   /**
@@ -78,16 +89,14 @@ public class User {
    * @param group The group of the user
    */
   public void setGroup(UserGroup group) {
-    // Check if the user is already in a group and remove it
+    logger.info("Setting group for user: {}.", name);
     if (this.group != null) {
+      logger.info("Removing user: {} from current group.", name);
       this.group.removeUser(this);
     }
-
-    // Set the group of the user
     this.group = group;
-
-    // Add the user to the group
     group.addUser(this);
+    logger.info("User: {} added to new group.", name);
   }
 
   /**
@@ -96,6 +105,7 @@ public class User {
    * @return The name of the user
    */
   public String getName() {
+    logger.debug("Fetching name for user: {}", name);
     return name;
   }
 
@@ -105,6 +115,7 @@ public class User {
    * @return The credential of the user
    */
   public String getCredential() {
+    logger.debug("Fetching credential for user: {}", name);
     return credential;
   }
 
@@ -114,6 +125,7 @@ public class User {
    * @return The group of the user
    */
   public UserGroup getGroup() {
+    logger.debug("Fetching group for user: {}", name);
     return group;
   }
 
@@ -124,7 +136,8 @@ public class User {
    */
   @Override
   public String toString() {
-    return "User{name=" + name + ", credential=" + credential + ", group=" + group + "}";
+    logger.debug("Converting user: {} to string.", name);
+    return "User{name=" + name + ", credential=" + credential
+        + ", group=" + (group != null ? "assigned" : "none") + "}";
   }
-
 }

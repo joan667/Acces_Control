@@ -5,38 +5,45 @@ import base.Door;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * A class that represents a request to refresh the simulator.
  */
 public class RequestRefresh implements Request {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.requests.RequestRefresh");
+
   private final ArrayList<JSONObject> jsonsDoors = new ArrayList<>();
 
   @Override
   public JSONObject answerToJson() {
+    logger.debug("Converting RequestRefresh to JSON.");
     JSONObject json = new JSONObject();
     json.put("doors", new JSONArray(jsonsDoors));
-    // jsonDoors has been set previously by process()
+    logger.info("JSON response created for RequestRefresh.");
     return json;
   }
 
   @Override
   public String toString() {
-    return "RequestRefresh{"
-        + jsonsDoors
-        + "}";
+    logger.debug("Converting RequestRefresh to String.");
+    return "RequestRefresh{" + jsonsDoors + "}";
   }
 
-  // Also this is used to paint the simulator when the page is loaded, and to display
-  // doors and readers after passing from locked to propped or propped to locked,
-  // pressing the Refresh Request button of the simulator.
-  // Also, to quickly test if the partition requests sent by the client app in Flutter
-  // works or not, retrieves the state of all the doors so that the simulator can
-  // repaint the readers
+  /**
+   * Process the refresh request.
+   */
   @Override
   public void process() {
+    logger.info("Processing RequestRefresh to update simulator state.");
     for (Door door : DirectoryAreas.getAllDoors()) {
+      logger.debug("Adding door id: {} to JSON response.", door.getId());
       jsonsDoors.add(door.toJson());
     }
+    logger.info("RequestRefresh processed successfully with {} doors updated.", jsonsDoors.size());
   }
 }

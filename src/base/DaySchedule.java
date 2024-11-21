@@ -1,11 +1,17 @@
 package base;
 
 import java.time.LocalDateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * A class that represents a schedule for a day of the week.
  */
 public class DaySchedule {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.DaySchedule");
 
   private final Day day;
   private final int start;
@@ -19,27 +25,28 @@ public class DaySchedule {
    * @param end The end time of the schedule (2 to 24)
    */
   public DaySchedule(Day day, int start, int end) {
-    // Check if the start time is before the end time
+    logger.info("Creating a new DaySchedule for day: {}, start: {}, end: {}", day, start, end);
+
     if (start >= end) {
+      logger.error("Start time ({}) is not before end time ({}).", start, end);
       throw new IllegalArgumentException("Start time must be before end time");
     }
 
-    // Check if the start time is between 1 and 23
     if (start < 1 || start > 23) {
+      logger.error("Start time ({}) is not between 1 and 23.", start);
       throw new IllegalArgumentException("Start time must be between 1 and 23");
     }
 
-    // Check if the end time is between 2 and 24
     if (end > 24) {
+      logger.error("End time ({}) is not between 2 and 24.", end);
       throw new IllegalArgumentException("End time must be between 2 and 24");
     }
 
-    // Set the day of the week
     this.day = day;
-
-    // Set the start and end time
     this.start = start;
     this.end = end;
+    logger.info("DaySchedule created successfully for day: {}, start: {}, end: {}",
+        day, start, end);
   }
 
   /**
@@ -49,19 +56,22 @@ public class DaySchedule {
    * @return True if the date is in the schedule, false otherwise
    */
   public boolean isInSchedule(LocalDateTime datetime) {
-    // Check if the date is on the same day
+    logger.debug("Checking if datetime: {} is in schedule for day: {}, start: {}, end: {}",
+        datetime, day, start, end);
+
     if (datetime.getDayOfWeek().getValue() != day.day()) {
+      logger.info("Datetime: {} is not on the same day as schedule day: {}", datetime, day);
       return false;
     }
 
-    // Get the current time in seconds
     int time = datetime.getHour() * 3600 + datetime.getMinute() * 60 + datetime.getSecond();
-
-    // Convert the start and end time to seconds
     int start = this.start * 3600;
     int end = this.end * 3600;
 
-    // Check if the time is between the start and end time
-    return time >= start && time < end;
+    boolean inSchedule = time >= start && time < end;
+    logger.info("Datetime: {} is {}in schedule for day: {}, start: {}, end: {}",
+        datetime, inSchedule ? "" : "not ", day, start, end);
+
+    return inSchedule;
   }
 }

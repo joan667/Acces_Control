@@ -1,11 +1,16 @@
 package base;
 
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * An area in a building. The area can specify groups of different types that contain doors.
  */
 public abstract class Area {
+  private static final Logger logger = LoggerFactory.getLogger("base.Area");
   protected String id;
   protected ArrayList<Partition> parents = new ArrayList<>();
 
@@ -15,8 +20,9 @@ public abstract class Area {
    * @param id The name of the area
    */
   public Area(String id) {
-    // Set the name of the area
+    logger.info("Creating area with id: {}", id);
     this.id = id;
+    logger.info("Area created successfully with id: {}", id);
   }
 
   /**
@@ -26,12 +32,15 @@ public abstract class Area {
    * @param parents The list of parent partitions
    */
   public Area(String id, Partition... parents) {
-    // Set the name of the area
+    logger.info("Creating area with id: {}", id);
     this.id = id;
-    // Add the area to the parent partitions if specified
+    logger.info("Area created successfully with id: {}", id);
+    logger.info("Adding parents to the area with id: {}", id);
     for (Partition parent : parents) {
+      logger.info("Adding parent partition to area with id: {}", id);
       this.addParent(parent);
     }
+    logger.info("All parents added successfully to area with id: {}", id);
   }
 
   /**
@@ -40,8 +49,9 @@ public abstract class Area {
    * @param parent The parent partition
    */
   public void addParent(Partition parent) {
-    // Add the area to the parent partition
+    logger.info("Adding parent partition to area with id: {}", id);
     parent.addChild(this);
+    logger.info("Parent partition added successfully to area with id: {}", id);
   }
 
   /**
@@ -50,6 +60,7 @@ public abstract class Area {
    * @return The name of the area
    */
   public String getId() {
+    logger.info("Accessing id of the area: {}", id);
     return id;
   }
 

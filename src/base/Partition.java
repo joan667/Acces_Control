@@ -1,12 +1,16 @@
 package base;
 
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * A class that represents a partition in the building.
  */
 public class Partition extends Area {
 
+  private static final Logger logger = LoggerFactory.getLogger("base.Partition");
   private final ArrayList<Area> areas = new ArrayList<>();
 
   /**
@@ -16,6 +20,7 @@ public class Partition extends Area {
    */
   public Partition(String id) {
     super(id);
+    logger.info("Partition created with id: {}", id);
   }
 
   /**
@@ -26,6 +31,7 @@ public class Partition extends Area {
    */
   public Partition(String id, Partition... parents) {
     super(id, parents);
+    logger.info("Partition created with id: {} and parents.", id);
   }
 
   /**
@@ -36,23 +42,23 @@ public class Partition extends Area {
    * @throws IllegalArgumentException If the partition is the same as this partition
    */
   public void addPartition(Partition partition) {
-    // Check if the partition is already added
+    logger.debug("Attempting to add partition with id: {} to partition with id: {}",
+        partition.getId(), this.id);
     if (this.getPartitions().contains(partition)) {
+      logger.warn("Partition with id: {} already exists in partition with id: {}",
+          partition.getId(), this.id);
       throw new IllegalArgumentException("Partition already exists in partition");
     }
-
-    // Check if the partition is the same as this partition
     if (partition == this) {
+      logger.error("Partition cannot contain itself: {}", this.id);
       throw new IllegalArgumentException("Partition cannot contain itself");
     }
-
-    // Add the partition to the partition
     areas.add(partition);
-
-    // Add the partition to the partition if not already added
     if (!partition.parents.contains(this)) {
       partition.parents.add(this);
     }
+    logger.info("Partition with id: {} added successfully to partition with id: {}",
+        partition.getId(), this.id);
   }
 
   /**
@@ -62,18 +68,19 @@ public class Partition extends Area {
    * @throws IllegalArgumentException If the space is already in the partition
    */
   public void addSpace(Space space) {
-    // Check if the space is already added
+    logger.debug("Attempting to add space with id: {} to partition with id: {}",
+        space.getId(), this.id);
     if (this.getSpaces().contains(space)) {
+      logger.warn("Space with id: {} already exists in partition with id: {}",
+          space.getId(), this.id);
       throw new IllegalArgumentException("Space already exists in partition");
     }
-
-    // Add the space to the partition
     areas.add(space);
-
-    // Add the partition to the space if not already added
     if (!space.parents.contains(this)) {
       space.parents.add(this);
     }
+    logger.info("Space with id: {} added successfully to partition with id: {}",
+        space.getId(), this.id);
   }
 
   /**
@@ -83,19 +90,18 @@ public class Partition extends Area {
    * @throws IllegalArgumentException If the area is not a Partition or Space
    */
   public void addChild(Area area) {
-    // Check if the area is a partition and add it
+    logger.debug("Attempting to add child area to partition with id: {}", this.id);
     if (area instanceof Partition) {
+      logger.debug("Child area is a partition with id: {}", area.getId());
       addPartition((Partition) area);
       return;
     }
-
-    // Check if the area is a space and add it
     if (area instanceof Space) {
+      logger.debug("Child area is a space with id: {}", area.getId());
       addSpace((Space) area);
       return;
     }
-
-    // Throw error if not a partition or space
+    logger.error("Area must be a Partition or Space to add to partition with id: {}", this.id);
     throw new IllegalArgumentException("Area must be a Partition or Space");
   }
 
@@ -105,17 +111,14 @@ public class Partition extends Area {
    * @return The partitions in the partition
    */
   public ArrayList<Partition> getPartitions() {
-    // Init partitions
+    logger.debug("Fetching partitions in partition with id: {}", this.id);
     ArrayList<Partition> partitions = new ArrayList<>();
-
-    // Loop through all the areas
     for (Area area : areas) {
       if (area instanceof Partition) {
         partitions.add((Partition) area);
       }
     }
-
-    // Return the list of partitions
+    logger.info("Found {} partitions in partition with id: {}", partitions.size(), this.id);
     return partitions;
   }
 
@@ -125,31 +128,22 @@ public class Partition extends Area {
    * @return The spaces in the partition
    */
   public ArrayList<Space> getSpaces() {
-    // Init spaces
+    logger.debug("Fetching spaces in partition with id: {}", this.id);
     ArrayList<Space> spaces = new ArrayList<>();
-
-    // Loop through all the areas
     for (Area area : areas) {
       if (area instanceof Space) {
         spaces.add((Space) area);
       }
     }
-
-    // Loop through all partitions to get the spaces
     for (Partition partition : this.getPartitions()) {
-
-      // Get the spaces in the partition
       ArrayList<Space> partitionSpaces = partition.getSpaces();
-
-      // Add the spaces to the list if not already added
       for (Space space : partitionSpaces) {
         if (!spaces.contains(space)) {
           spaces.add(space);
         }
       }
     }
-
-    // Return the list of spaces
+    logger.info("Found {} spaces in partition with id: {}", spaces.size(), this.id);
     return spaces;
   }
 
@@ -159,26 +153,18 @@ public class Partition extends Area {
    * @return The doors in the partition
    */
   public ArrayList<Door> getDoors() {
-    // Get the spaces in the partition
+    logger.debug("Fetching doors in partition with id: {}", this.id);
     ArrayList<Space> spaces = getSpaces();
-
-    // Create an empty list of doors
     ArrayList<Door> doors = new ArrayList<>();
-
-    // Loop through all spaces to get the doors
     for (Space space : spaces) {
       ArrayList<Door> spaceDoors = space.getDoors();
-
-      // Add the doors to the list if not already added
       for (Door door : spaceDoors) {
         if (!doors.contains(door)) {
           doors.add(door);
         }
       }
     }
-
-    // Return the list of doors
+    logger.info("Found {} doors in partition with id: {}", doors.size(), this.id);
     return doors;
   }
-
 }

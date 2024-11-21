@@ -3,11 +3,16 @@ package base;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * A class that observes timed events and notifies when they expire.
  */
 public class Observer implements Runnable {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.Observer");
 
   private static Observer instance = null;
   private final List<TimedEvent> timedEvents;
@@ -17,10 +22,12 @@ public class Observer implements Runnable {
    * Create and start the observer.
    */
   private Observer() {
+    logger.info("Creating a new Observer instance.");
     timedEvents = new ArrayList<>();
     running = true;
     Thread thread = new Thread(this);
     thread.start();
+    logger.info("Observer instance created and started successfully.");
   }
 
   /**
@@ -29,12 +36,12 @@ public class Observer implements Runnable {
    * @return The instance of the observer
    */
   public static synchronized Observer getInstance() {
-    // Check if the instance is already created
     if (instance != null) {
+      logger.debug("Returning existing Observer instance.");
       return instance;
     }
 
-    // Create a new instance
+    logger.info("Creating a new Observer instance (singleton).");
     instance = new Observer();
     return instance;
   }
@@ -45,7 +52,9 @@ public class Observer implements Runnable {
    * @param timedEvent The timed event to add
    */
   public void addTimedEvent(TimedEvent timedEvent) {
+    logger.debug("Adding a new timed event to the Observer.");
     timedEvents.add(timedEvent);
+    logger.info("Timed event added successfully.");
   }
 
   /**
@@ -54,7 +63,9 @@ public class Observer implements Runnable {
    * @param timedEvent The timed event to remove
    */
   public void removeTimedEvent(TimedEvent timedEvent) {
+    logger.debug("Removing a timed event from the Observer.");
     timedEvents.remove(timedEvent);
+    logger.info("Timed event removed successfully.");
   }
 
   /**
@@ -62,44 +73,42 @@ public class Observer implements Runnable {
    */
   @Override
   public void run() {
-    // Loop while the observer is running
-    while (running) {
+    logger.info("Observer thread started.");
 
-      // Get the current time
+    while (running) {
       long currentTime = System.currentTimeMillis();
+      //logger.debug("Current time: {}", currentTime);
 
       synchronized (this) {
-        // Iterate over the timed events
         Iterator<TimedEvent> iterator = timedEvents.iterator();
         while (iterator.hasNext()) {
           TimedEvent event = iterator.next();
 
-          // Check if the timed event is expired
           if (event.isExpired(currentTime)) {
-
-            // Notify and remove the timed event
+            logger.info("Timed event expired. Notifying and removing it.");
             event.notifyExpired();
             iterator.remove();
+            logger.debug("Timed event removed from the Observer.");
           }
         }
       }
 
-      // Sleep for a while
       try {
-        //noinspection BusyWait (A solution is using event listeners, but observer is a requirement)
         Thread.sleep(100);
       } catch (InterruptedException e) {
-        System.out.println("Observer interrupted");
+        logger.warn("Observer thread interrupted.", e);
       }
     }
+
+    logger.info("Observer thread stopped.");
   }
 
   /**
    * Stop the observer.
    */
-  @SuppressWarnings("unused")   // This method is not used yet, but is necessary to exit the loop
+  @SuppressWarnings("unused") // This method is not used yet, but is necessary to exit the loop
   public void stop() {
+    logger.info("Stopping the Observer.");
     running = false;
   }
-
 }

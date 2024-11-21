@@ -8,11 +8,17 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 
 /**
  * A class that represents a request for an area.
  */
 public class RequestArea implements Request {
+
+  private static final Logger logger = LoggerFactory.getLogger("base.requests.RequestArea");
 
   private final String credential;
   private final String action;
@@ -24,17 +30,21 @@ public class RequestArea implements Request {
    * Create a new request for an area.
    *
    * @param credential The credential of the request
-   * @param action The action of the request
-   * @param now The current time
-   * @param areaId The id of the area
+   * @param action     The action of the request
+   * @param now        The current time
+   * @param areaId     The id of the area
    */
   public RequestArea(String credential, String action, LocalDateTime now, String areaId) {
-    this.credential = credential;
-    this.areaId = areaId;
+    logger.info("Creating RequestArea with credential: {}, action: {}, areaId: {}, at: {}",
+        credential, action, areaId, now);
     assert action.equals(Actions.LOCK) || action.equals(Actions.UNLOCK)
-            : "invalid action " + action + " for an area request";
+        : "Invalid action " + action + " for an area request";
+    this.credential = credential;
     this.action = action;
     this.now = now;
+    this.areaId = areaId;
+    logger.debug("RequestArea created successfully with credential: {}, action: {}, "
+        + "areaId: {}, at: {}", credential, action, areaId, now);
   }
 
   /**
@@ -44,11 +54,13 @@ public class RequestArea implements Request {
    */
   @SuppressWarnings("unused")   // it is used in the simulator
   public String getAction() {
+    logger.debug("Fetching action for RequestArea with areaId: {}", areaId);
     return action;
   }
 
   @Override
   public JSONObject answerToJson() {
+    logger.debug("Converting RequestArea with areaId: {} to JSON response.", areaId);
     JSONObject json = new JSONObject();
     json.put("action", action);
     json.put("areaId", areaId);
@@ -58,54 +70,40 @@ public class RequestArea implements Request {
     }
     json.put("requestsDoors", jsonRequests);
     json.put("todo", "request areas not yet implemented");
+    logger.info("JSON response created for RequestArea with areaId: {}", areaId);
     return json;
   }
 
   @Override
   public String toString() {
-    String requestsDoorsStr;
-    if (requests.isEmpty()) {
-      requestsDoorsStr = "";
-    } else {
-      requestsDoorsStr = requests.toString();
-    }
+    logger.debug("Converting RequestArea with areaId: {} to String.", areaId);
+    String requestsDoorsStr = requests.isEmpty() ? "" : requests.toString();
     return "Request{"
-            + "credential=" + credential
-            + ", action=" + action
-            + ", now=" + now
-            + ", areaId=" + areaId
-            + ", requestsDoors=" + requestsDoorsStr
-            + "}";
+        + "credential=" + credential
+        + ", action=" + action
+        + ", now=" + now
+        + ", areaId=" + areaId
+        + ", requestsDoors=" + requestsDoorsStr
+        + "}";
   }
-
-  // processing the request of an area is creating the corresponding door requests and forwarding
-  // them to all of its doors. For some it may be authorized and action will be done, for others
-  // it won't be authorized and nothing will happen to them.
 
   /**
    * Process the request.
    */
   public void process() {
-    // commented out until Area, Space and Partition are implemented
-
-    // make the door requests and put them into the area request to be authorized later and
-    // processed later
+    logger.info("Processing RequestArea with areaId: {} and action: {}", areaId, action);
     Area area = DirectoryAreas.findAreaById(areaId);
-    // an Area is a Space or a Partition
-    //noinspection ConstantConditions, because in the simulator maybe the area is not selected
     if (area != null) {
-      // is null when from the app we click on an action but no place is selected because
-      // there (flutter) I don't control like I do in javascript that all the parameters provided
-
-      // Make all the door requests, one for each door in the area, and process them.
-      // Look for the doors in the spaces of this area that give access to them.
+      logger.debug("Found area with areaId: {}. Creating door requests.", areaId);
       for (Door door : area.getDoors()) {
         RequestReader requestReader = new RequestReader(credential, action, now, door.getId());
         requestReader.process();
-        // after process() the area request contains the answer as the answer
-        // to each individual door request, that is read by the simulator/Flutter app
         requests.add(requestReader);
+        logger.debug("Processed request for doorId: {} in areaId: {}", door.getId(), areaId);
       }
+      logger.info("RequestArea with areaId: {} processed successfully.", areaId);
+    } else {
+      logger.warn("Area with areaId: {} not found. Request cannot be processed.", areaId);
     }
   }
 }
