@@ -4,21 +4,30 @@ import base.Actions;
 import base.Area;
 import base.DirectoryAreas;
 import base.Door;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-
+/**
+ * A class that represents a request for an area.
+ */
 public class RequestArea implements Request {
+
   private final String credential;
   private final String action;
   private final String areaId;
   private final LocalDateTime now;
-  private ArrayList<RequestReader> requests = new ArrayList<>();
+  private final ArrayList<RequestReader> requests = new ArrayList<>();
 
-
+  /**
+   * Create a new request for an area.
+   *
+   * @param credential The credential of the request
+   * @param action The action of the request
+   * @param now The current time
+   * @param areaId The id of the area
+   */
   public RequestArea(String credential, String action, LocalDateTime now, String areaId) {
     this.credential = credential;
     this.areaId = areaId;
@@ -28,6 +37,12 @@ public class RequestArea implements Request {
     this.now = now;
   }
 
+  /**
+   * Get the credential of the request.
+   *
+   * @return The credential of the request
+   */
+  @SuppressWarnings("unused")   // it is used in the simulator
   public String getAction() {
     return action;
   }
@@ -49,7 +64,7 @@ public class RequestArea implements Request {
   @Override
   public String toString() {
     String requestsDoorsStr;
-    if (requests.size() == 0) {
+    if (requests.isEmpty()) {
       requestsDoorsStr = "";
     } else {
       requestsDoorsStr = requests.toString();
@@ -66,6 +81,10 @@ public class RequestArea implements Request {
   // processing the request of an area is creating the corresponding door requests and forwarding
   // them to all of its doors. For some it may be authorized and action will be done, for others
   // it won't be authorized and nothing will happen to them.
+
+  /**
+   * Process the request.
+   */
   public void process() {
     // commented out until Area, Space and Partition are implemented
 
@@ -73,9 +92,10 @@ public class RequestArea implements Request {
     // processed later
     Area area = DirectoryAreas.findAreaById(areaId);
     // an Area is a Space or a Partition
+    //noinspection ConstantConditions, because in the simulator maybe the area is not selected
     if (area != null) {
       // is null when from the app we click on an action but no place is selected because
-      // there (flutter) I don't control like I do in javascript that all the parameters are provided
+      // there (flutter) I don't control like I do in javascript that all the parameters provided
 
       // Make all the door requests, one for each door in the area, and process them.
       // Look for the doors in the spaces of this area that give access to them.

@@ -2,9 +2,12 @@ package base;
 
 import java.util.ArrayList;
 
+/**
+ * An area in a building. The area can specify groups of different types that contain doors.
+ */
 public abstract class Area {
   protected String id;
-  protected ArrayList<Partition> parents = new ArrayList<Partition>();
+  protected ArrayList<Partition> parents = new ArrayList<>();
 
   /**
    * Create a new area with a name.
@@ -26,8 +29,9 @@ public abstract class Area {
     // Set the name of the area
     this.id = id;
     // Add the area to the parent partitions if specified
-    for (Partition parent : parents)
+    for (Partition parent : parents) {
       this.addParent(parent);
+    }
   }
 
   /**
@@ -50,18 +54,9 @@ public abstract class Area {
   }
 
   /**
-   * Get the partitions that contain the area.
-   *
-   * @return The partitions that contain the area
-   */
-  public ArrayList<Partition> getParents() {
-    return parents;
-  }
-
-  /**
    * Get the doors in the area.
    *
    * @return The doors in the area
    */
-  abstract public ArrayList<Door> getDoors();
+  public abstract ArrayList<Door> getDoors();
 }

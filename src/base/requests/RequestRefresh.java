@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * A class that represents a request to refresh the simulator.
+ */
 public class RequestRefresh implements Request {
   private final ArrayList<JSONObject> jsonsDoors = new ArrayList<>();
 
@@ -30,6 +33,7 @@ public class RequestRefresh implements Request {
   // Also, to quickly test if the partition requests sent by the client app in Flutter
   // works or not, retrieves the state of all the doors so that the simulator can
   // repaint the readers
+  @Override
   public void process() {
     for (Door door : DirectoryAreas.getAllDoors()) {
       jsonsDoors.add(door.toJson());

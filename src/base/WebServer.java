@@ -1,10 +1,9 @@
 package base;
 
 import base.requests.Request;
+import base.requests.RequestArea;
 import base.requests.RequestReader;
 import base.requests.RequestRefresh;
-import base.requests.RequestArea;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,33 +17,55 @@ import java.util.StringTokenizer;
 // Based on
 // https://www.ssaurel.com/blog/create-a-simple-http-web-server-in-java
 // http://www.jcgonzalez.com/java-socket-mini-server-http-example
+
+/**
+ * A class that represents a web server.
+ */
 public class WebServer {
+
   private static final int PORT = 8080; // port to listen connection
   private static final DateTimeFormatter formatter =
           DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+  private boolean running = true;
 
+  /**
+   * Create a new web server.
+   */
   public WebServer() {
-    try {
-      ServerSocket serverConnect = new ServerSocket(PORT);
-      System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
-      // we listen until user halts server execution
-      while (true) {
-        // each client connection will be managed in a dedicated Thread
-        new SocketThread(serverConnect.accept());
-        // create dedicated thread to manage the client connection
+    System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
+
+    try (ServerSocket serverConnect = new ServerSocket(PORT)) {
+      //noinspection ConstantValue, that in the current version of the program is always true
+      while (running) {
+        try {
+          // Each new client connection is managed in a new thread
+          new SocketThread(serverConnect.accept());
+        } catch (IOException e) {
+          System.err.println("Error accepting client connection: " + e.getMessage());
+        }
       }
     } catch (IOException e) {
-      System.err.println("Server Connection error : " + e.getMessage());
+      System.err.println("Server Connection error: " + e.getMessage());
     }
   }
 
+  /**
+   * Stop the web server.
+   */
+  @SuppressWarnings("unused")   // this method is not used in the current version of the program
+  public void stop() {
+    running = false;
+  }
 
-  private class SocketThread extends Thread {
+  /**
+   * A class that represents a socket thread.
+   */
+  private static class SocketThread extends Thread {
     // as an inner class, SocketThread sees WebServer attributes
-    private final Socket insocked; // client connection via Socket class
+    private final Socket socket; // client connection via Socket class
 
-    SocketThread(Socket insocket) {
-      this.insocked = insocket;
+    SocketThread(Socket socket) {
+      this.socket = socket;
       this.start();
     }
 
@@ -57,14 +78,14 @@ public class WebServer {
 
       try {
         // we read characters from the client via input stream on the socket
-        in = new BufferedReader(new InputStreamReader(insocked.getInputStream()));
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         // we get character output stream to client
-        out = new PrintWriter(insocked.getOutputStream());
+        out = new PrintWriter(socket.getOutputStream());
         // get first line of the request from the client
         String input = in.readLine();
         // we parse the request with a string tokenizer
 
-        System.out.println("sockedthread : " + input);
+        System.out.println("socked thread : " + input);
 
         StringTokenizer parse = new StringTokenizer(input);
         String method = parse.nextToken().toUpperCase(); // we get the HTTP method of the client
@@ -104,7 +125,7 @@ public class WebServer {
 
         in.close();
         out.close();
-        insocked.close(); // we close socket connection
+        socket.close(); // we close socket connection
       } catch (Exception e) {
         System.err.println("Exception : " + e);
       }
@@ -168,7 +189,7 @@ public class WebServer {
       answer += "HTTP/1.0 200 OK\r\n";
       answer += "Content-type: application/json\r\n";
       answer += "Access-Control-Allow-Origin: *\r\n";
-      // SUPERIMPORTANT to avoid the CORS problem :
+      // SUPER IMPORTANT to avoid the CORS problem :
       // "Cross-Origin Request Blocked: The Same Origin Policy disallows reading
       // the remote resource..."
       answer += "\r\n"; // blank line between headers and content, very important !

@@ -1,0 +1,59 @@
+1568871 - Xavier Burgos Flores
+1565785 - Joan Masdefiol Colomé
+1638231 - Gianina Sotelo García
+
+-----
+
+Gianina ha desenvolupat el patró State:
+- Ha creat la classe DoorState i les seves classes filles LockedState i UnlockedState.
+- Ha creat la classe Actions amb els seus atributs que especifiquen les accions d'obrir, tancar, bloquejar i desbloquejar la porta.
+- Ha creat la classe States amb els seus atributs que especifiquen els estats de la porta.
+- També va crear el Door des de zero amb els atributs i mètodes, per tal de que sigui compatible amb els estats previs.
+
+Joan va contribuir en el patró State:
+- Millorant les classes DoorState, LockedState i UnlockedState per tal de que les accions realitzades quedin reflexades
+  en les classes corresponents.
+- Afegint missatges pel terminal especificant per qué es realitzen o no les accions.
+
+Xavier va contribuir en el patró State:
+- Afegint la classe ProppedState i la classe UnlockedShortlyState, sense implementar-les, però deixant-les preparades per
+  a ser implementades.
+- Afegint l'acció de desbloquejar temporalment la porta a Actions i els estats corresponents
+  a States.
+
+-----
+
+Joan ha desenvolupat el patró Composite:
+- Ha creat les classes Area, Partition i Space, on Area és la classe abstracta que conté els mètodes comuns a les altres classes.
+- Ha afegit els mètodes més importants de Partition i Space, com ara afegir i eliminar àrees, obtenir portes, etc.
+- Posteriorment, creant els horaris i accions específiques per cada grup d'usuaris.
+
+Gianina ha desenvolupat la gestió de grups:
+- Ha creat la classe UserGroup, on es poden afegir i eliminar usuaris, així com obtenir-los.
+- Ha afegit la possibilitat d'afegir permisos (accions) a un grup, i de comprovar si un usuari té un permís concret.
+- Ha creat la classe Schedule, preparada per afegir-hi horaris i comprovar si un usuari té permís en un moment concret.
+
+Xavier va contribuir en el patró Composite:
+- Comentant tot el codi de les classes fins al moment, per tal de que sigui més fàcil de llegir i entendre.
+- Sustituint "DirectoryDoor" per "DirectoryAreas", i creant nous mètodes per tal de poder recórrer les àrees i les portes.
+- Modificant la classe "Door" per tal de que estiguin relacionades amb els espais.
+- Afegint les classes "DaySchedules" y "Day" per permetre un control detallat per setmanes.
+
+-----
+
+Xavier ha desenvolupat el patró Observer:
+- Ha creat les classes "Observer" i "Clock" per tal de poder controlar l'UnlockedShortlyState.
+- Ha afegit les interfícies "Observerable" i "TimedEvent" per tal de poder implementar-les a les classes corresponents.
+- Comentant tot el codi amb els nous canvis i separant funcions per tal de que sigui més fàcil de llegir i entendre.
+- Modificant la classe "UnlockedShortlyState" amb nous mètodes que controlen el rellotge per desbloquejar temporalment la porta.
+
+Joan ha contribuit en el patró Observer:
+- Fent que la classe "Observer" sigui un singleton, per tal de que només hi hagi una instància de la classe.
+- Millorant els mètodes de "Clock" per tal de que sigui més òptim i eficient, en concret, afegint mètodes per reiniciar
+  i cancel·lar el rellotge.
+- Completant la classe "UnlockedShortlyState" amb els mètodes que falten per reiniciar i cancel·lar el rellotge.
+
+Gianina va contribuir en el patró Observer:
+- Modificant els requests per tal de que es puguin realitzar les accions i comprovant que estiguin en l'horari programat.
+- Expandint l'UML amb les noves classes, implementacions i relacions.
+- Completant la classe "ProppedState" per tal de que la porta es torni a bloquejar si es tanca.

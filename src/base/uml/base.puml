@@ -71,7 +71,6 @@ abstract class Area {
 + Area(id : String, ...parents : Partition[])
 + addParent(parent : Partition)
 + getId() : String
-+ getParents() : Partition[]
 + getDoors() : Door[]
 }
 
@@ -241,10 +240,8 @@ class UserGroup {
 + removeUser(user : User)
 + addArea(area : Area)
 + addAreas(areas : Area[])
-+ removeArea(area : Area)
 + addAction(action : String)
 + addActions(actions : String[])
-+ removeAction(action : String)
 + hasAccess(space : Space) : boolean
 + canPerform(action : String, datetime : LocalDateTime) : boolean
 + getUsers() : User[]
@@ -289,7 +286,6 @@ class Day {
 + SATURDAY : Int
 + SUNDAY : Int
 - day : Int
-+ Day(day : Int)
 + getWeekDays() : Day[]
 + getWeekendDays() : Day[]
 + getAllDays() : Day[]
@@ -302,9 +298,6 @@ class DaySchedule {
 - end : Int
 + DaySchedule(day : Day, start : Int, end : Int)
 + isInSchedule(datetime : LocalDateTime) : boolean
-+ getDay() : Day
-+ getStart() : Int
-+ getEnd() : Int
 }
 
 DaySchedule --> Day : "day"

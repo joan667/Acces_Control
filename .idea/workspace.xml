@@ -4,31 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="Areas and User groups and comments">
+    <list default="true" id="4eb1412c-e8ca-4b1e-89dc-c596ef057f11" name="Changes" comment="Autores">
+      <change afterPath="$PROJECT_DIR$/authors.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Area.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Door.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/DoorState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/LockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/doorStates/LockedState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Partition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/Space.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/UnlockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/doorStates/UnlockedState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/UserGroup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/baseNoStates/uml/base_no_states.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Actions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Actions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Clock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Clock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Day.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/DaySchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/DaySchedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/DirectoryAreas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/DirectoryAreas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/DirectoryUserGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/DirectoryUserGroups.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Door.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Door.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/DoorState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/DoorState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Observer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Observer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Observerable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Observable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Partition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Partition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/Space.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/Space.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/States.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/States.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/TimedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/TimedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/UserGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/UserGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/WebServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/doorStates/LockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/doorstates/LockedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/doorStates/ProppedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/doorstates/ProppedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/doorStates/UnlockedShortlyState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/doorstates/UnlockedShortlyState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/doorStates/UnlockedState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/doorstates/UnlockedState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/requests/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/requests/Request.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/requests/RequestArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/requests/RequestArea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/requests/RequestReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/requests/RequestReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/requests/RequestRefresh.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/requests/RequestRefresh.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/uml/base.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/uml/base.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev/areas" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -47,36 +66,40 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 7
 }</component>
-  <component name="ProjectId" id="2nTUlWrlsPGnxqv7PtvSt8OaGke" />
+  <component name="ProjectId" id="2nuro8j0pkqkXSQ2PU1jT0KPeW0" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev/areas",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="baseNoStates.Main" />
+      <option name="MAIN_CLASS_NAME" value="base.Main" />
       <module name="Acces_Control" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -86,59 +109,73 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1ca37aaf-0ed4-49b9-9de4-cddbcff244a3" name="Changes" comment="" />
-      <created>1728996711985</created>
+      <changelist id="4eb1412c-e8ca-4b1e-89dc-c596ef057f11" name="Changes" comment="" />
+      <created>1729833974255</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1728996711985</updated>
-      <workItem from="1728996713322" duration="8305000" />
-      <workItem from="1729161171399" duration="635000" />
-      <workItem from="1729163845444" duration="1114000" />
-      <workItem from="1729233661868" duration="554000" />
-      <workItem from="1729234223343" duration="3474000" />
-      <workItem from="1729430737400" duration="23520000" />
+      <updated>1729833974255</updated>
+      <workItem from="1729833975845" duration="3063000" />
+      <workItem from="1729850896223" duration="6634000" />
+      <workItem from="1730293549848" duration="1327000" />
+      <workItem from="1730826304915" duration="14000" />
+      <workItem from="1731052528403" duration="1281000" />
+      <workItem from="1731053817350" duration="131000" />
+      <workItem from="1731053954781" duration="114000" />
+      <workItem from="1731054075132" duration="2104000" />
+      <workItem from="1732179058810" duration="289000" />
+      <workItem from="1732179353224" duration="823000" />
+      <workItem from="1732180183403" duration="3480000" />
+      <workItem from="1732189143891" duration="3447000" />
     </task>
-    <task id="LOCAL-00001" summary="DirectoryAreas init and doors">
+    <task id="LOCAL-00001" summary="Merge">
       <option name="closed" value="true" />
-      <created>1729009015497</created>
+      <created>1729834155598</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1729009015497</updated>
+      <updated>1729834155598</updated>
     </task>
-    <task id="LOCAL-00002" summary="DirectoryAreas make implementation">
+    <task id="LOCAL-00002" summary="Base refactor and UML">
       <option name="closed" value="true" />
-      <created>1729164325784</created>
+      <created>1729834571904</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1729164325784</updated>
+      <updated>1729834571904</updated>
     </task>
-    <task id="LOCAL-00003" summary="DirectoryAreas comments">
+    <task id="LOCAL-00003" summary="Day refactor and UML">
       <option name="closed" value="true" />
-      <created>1729430919964</created>
+      <created>1729848444567</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1729430919964</updated>
+      <updated>1729848444567</updated>
     </task>
-    <task id="LOCAL-00004" summary="Areas and User groups and comments">
+    <task id="LOCAL-00004" summary="Areas fixed">
       <option name="closed" value="true" />
-      <created>1729448638135</created>
+      <created>1729852118015</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1729448638135</updated>
+      <updated>1729852118015</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Last fixes">
+      <option name="closed" value="true" />
+      <created>1729853897554</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1729853897554</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,20 +193,16 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="DirectoryAreas init and doors" />
-    <MESSAGE value="DirectoryAreas make implementation" />
-    <MESSAGE value="DirectoryAreas comments" />
-    <MESSAGE value="Areas and User groups and comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Areas and User groups and comments" />
+    <MESSAGE value="Merge" />
+    <MESSAGE value="Base refactor and UML" />
+    <MESSAGE value="Day refactor and UML" />
+    <MESSAGE value="Partitions and Spaces to Areas" />
+    <MESSAGE value="Areas fixed" />
+    <MESSAGE value="Last fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Last fixes" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint type="java-exception">
-          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
-          <option name="timeStamp" value="4" />
-        </breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

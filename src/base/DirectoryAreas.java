@@ -1,165 +1,15 @@
 package base;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+/**
+ * A class that contains the areas and doors in a building.
+ */
 public final class DirectoryAreas  {
   private static Area rootArea;
-  private static ArrayList<Area> areas = new ArrayList<Area>();
-  private static ArrayList<Door> doors = new ArrayList<Door>();
-
-  /**
-   * Import areas and doors from a JSON file.
-   * The JSON file should have the following format:
-   * {
-   *   "partitions": [
-   *     { "id": "P1" },
-   *     { "id": "P2", "partitions": ["P1"] }
-   *   ],
-   *   "spaces": [
-   *     { "id": "S1", "partitions": ["P2"] },
-   *     { "id": "S2", "partitions": ["P2"] }
-   *   ],
-   *   "doors": [
-   *     { "id": "D1", "spaces": ["S1"] },
-   *     { "id": "D2", "spaces": ["S1", "S2"] }
-   *   ],
-   *   "root": "P1"
-   * }
-   *
-   * @param filename The name of the file to import
-   */
-  public static void importAreas(String filename) {
-    // Initialize the partitions and spaces
-    ArrayList<Partition> partitions = new ArrayList<Partition>();
-    ArrayList<Space> spaces = new ArrayList<Space>();
-
-    // Read the file content
-    String content;
-    try {
-      content = new String(Files.readAllBytes(Paths.get(filename)));
-    } catch (IOException e) {
-      throw new IllegalArgumentException("File not found");
-    }
-    // Load the JSON from the file content
-    JSONObject json;
-    try {
-      json = new JSONObject(content);
-    } catch (Exception e) {
-        throw new IllegalArgumentException("Invalid JSON");
-    }
-    // Check if partitions are defined
-    if (json.has("partitions")) {
-      JSONArray jsonPartitions = json.getJSONArray("partitions");
-      // Loop through all the partitions to instance the class
-      for (int i = 0; i < jsonPartitions.length(); i++) {
-        JSONObject jsonPartition = jsonPartitions.getJSONObject(i);
-        String id = jsonPartition.getString("id");
-        Partition partition = new Partition(id);
-        partitions.add(partition);
-      }
-      // Loop through all the partitions to add the parent partitions
-      for (int i = 0; i < jsonPartitions.length(); i++) {
-        JSONObject jsonPartition = jsonPartitions.getJSONObject(i);
-        Partition partition = partitions.get(i);
-        if (jsonPartition.has("partitions")) {
-          JSONArray jsonParents = jsonPartition.getJSONArray("partitions");
-          for (int j = 0; j < jsonParents.length(); j++) {
-            String parentId = jsonParents.getString(j);
-            Partition parent = null;
-            for (Partition p : partitions)
-              if (p.getId().equals(parentId)) {
-                parent = p;
-                break;
-              }
-            if (parent == null)
-              throw new IllegalArgumentException("Parent partition not found");
-            parent.addPartition(partition);
-          }
-        }
-      }
-    }
-    // Check if spaces are defined
-    if (json.has("spaces")) {
-      JSONArray jsonSpaces = json.getJSONArray("spaces");
-      // Loop through all the partitions to instance the class and add the partitions
-      for (int i = 0; i < jsonSpaces.length(); i++) {
-        JSONObject jsonSpace = jsonSpaces.getJSONObject(i);
-        String id = jsonSpace.getString("id");
-        Space space = new Space(id);
-        spaces.add(space);
-        if (jsonSpace.has("partitions")) {
-          JSONArray jsonParents = jsonSpace.getJSONArray("partitions");
-          for (int j = 0; j < jsonParents.length(); j++) {
-            String parentId = jsonParents.getString(j);
-            Partition parent = null;
-            for (Partition p : partitions)
-              if (p.getId().equals(parentId)) {
-                parent = p;
-                break;
-              }
-            if (parent == null)
-              throw new IllegalArgumentException("Parent partition not found");
-            parent.addSpace(space);
-          }
-        }
-      }
-    }
-    // Check if doors are defined
-    if (json.has("doors")) {
-      JSONArray jsonDoors = json.getJSONArray("doors");
-      // Loop through all the doors to instance the class and add the spaces
-      for (int i = 0; i < jsonDoors.length(); i++) {
-        JSONObject jsonDoor = jsonDoors.getJSONObject(i);
-        String id = jsonDoor.getString("id");
-        String fromId = jsonDoor.getString("from");
-        String toId = jsonDoor.getString("to");
-        Space from = null;
-        Space to = null;
-        for (Space s : spaces) {
-          if (s.getId().equals(fromId))
-            from = s;
-          if (s.getId().equals(toId))
-            to = s;
-          if (from != null && to != null) {
-            if (from == to)
-              throw new IllegalArgumentException("Door cannot connect the same space");
-            break;
-          }
-        }
-        if (from == null || to == null)
-          throw new IllegalArgumentException("Door spaces not found");
-        Door door = new Door(id, from, to);
-        doors.add(door);
-      }
-    }
-    // Add all the areas to the list
-    areas.addAll(partitions);
-    areas.addAll(spaces);
-
-    // Check if root area is not defined
-    if (!json.has("root"))
-      throw new IllegalArgumentException("Root area not found");
-    // Set the root area
-    String rootId = json.getString("root");
-    for (Partition p : partitions)
-      if (p.getId().equals(rootId)) {
-        rootArea = p;
-        return;
-      }
-    for (Space s : spaces)
-      if (s.getId().equals(rootId)) {
-        rootArea = s;
-        return;
-      }
-    throw new IllegalArgumentException("Root area not found");
-  }
+  private static final ArrayList<Area> areas = new ArrayList<>();
+  private static ArrayList<Door> doors = new ArrayList<>();
 
   /**
    * Initialize manually the areas and doors.
@@ -170,7 +20,9 @@ public final class DirectoryAreas  {
     Partition basement    = new Partition("basement",     building);
     Partition groundFloor = new Partition("ground_floor", building);
     Partition floor1      = new Partition("floor1",      building);
-    ArrayList<Partition> partitions = new ArrayList<Partition>(Arrays.asList(building, basement, groundFloor, floor1));
+    ArrayList<Partition> partitions = new ArrayList<>(Arrays.asList(
+            building, basement, groundFloor, floor1
+    ));
 
     // Initialize the spaces
     Space parking  = new Space("parking",  basement);
@@ -182,7 +34,10 @@ public final class DirectoryAreas  {
     Space room3    = new Space("room3",   floor1);
     Space corridor = new Space("corridor", floor1);
     Space it       = new Space("IT",       floor1);
-    ArrayList<Space> spaces = new ArrayList<Space>(Arrays.asList(parking, exterior, stairs, hall, room1, room2, room3, corridor, it));
+    ArrayList<Space> spaces = new ArrayList<>(Arrays.asList(
+            parking, exterior, stairs, hall, room1,
+            room2, room3, corridor, it
+    ));
 
     // Initialize the areas
     areas.addAll(partitions);
@@ -198,7 +53,9 @@ public final class DirectoryAreas  {
     Door d7 = new Door("D7", corridor, stairs);
     Door d8 = new Door("D8", room3,    corridor);
     Door d9 = new Door("D9", it,       corridor);
-    doors = new ArrayList<Door>(Arrays.asList(d1, d2, d3, d4, d5, d6, d7, d8, d9));
+    doors = new ArrayList<>(Arrays.asList(
+            d1, d2, d3, d4, d5, d6, d7, d8, d9
+    ));
 
     // Set the root area
     rootArea = building;
@@ -213,9 +70,11 @@ public final class DirectoryAreas  {
    */
   public static Area findAreaById(String id) {
     // Loop through all areas to find it
-    for (Area area : areas)
-      if (area.getId().equals(id))
+    for (Area area : areas) {
+      if (area.getId().equals(id)) {
         return area;
+      }
+    }
 
     // Throw error if not found
     throw new IllegalArgumentException("Area with id \"" + id + "\" not found");
@@ -230,9 +89,11 @@ public final class DirectoryAreas  {
    */
   public static Door findDoorById(String id) {
     // Loop through all doors to find it
-    for (Door door : doors)
-      if (door.getId().equals(id))
+    for (Door door : doors) {
+      if (door.getId().equals(id)) {
         return door;
+      }
+    }
 
     // Throw error if not found
     throw new IllegalArgumentException("Door with id \"" + id + "\" not found");
@@ -248,50 +109,15 @@ public final class DirectoryAreas  {
   }
 
   /**
-   * Get all the partitions.
-   *
-   * @return The list of all partitions
-   */
-  public static ArrayList<Partition> getAllPartitions() {
-    // Init partitions
-    ArrayList<Partition> partitions = new ArrayList<Partition>();
-
-    // Loop through all the areas
-    for (Area area : areas)
-      if (area instanceof Partition)
-        partitions.add((Partition) area);
-
-    // Return the list of partitions
-    return partitions;
-  }
-
-  /**
-   * Get all the spaces.
-   *
-   * @return The list of all spaces
-   */
-  public static ArrayList<Space> getAllSpaces() {
-    // Init spaces
-    ArrayList<Space> spaces = new ArrayList<Space>();
-
-    // Loop through all the areas
-    for (Area area : areas)
-      if (area instanceof Space)
-        spaces.add((Space) area);
-
-    // Return the list of spaces
-    return spaces;
-  }
-
-  /**
    * Get all the doors.
    *
    * @return The list of all doors
    */
   public static ArrayList<Door> getAllDoors() {
     // Check if the root area is set and return its doors
-    if (rootArea != null)
+    if (rootArea != null) {
       return rootArea.getDoors();
+    }
 
     // Return all the doors
     return doors;
