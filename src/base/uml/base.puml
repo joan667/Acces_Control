@@ -168,15 +168,24 @@ interface Observerable {
 + update()
 }
 
-class UnlockedShortlyState extends DoorState implements Observerable {
+class Clock implements "java.util.Observable"{
+-instance: Clock
+-observers: List<Observer>
+-running: Boolean;
+-dateTime: LocalDateTime
+
+-Clock()
++getInstance()
+-stopTimer()
+-startTimer()
+}
+
+class UnlockedShortlyState extends DoorState implements "java.util.Observer" {
 + UnlockedShortlyState(door : Door)
 + update()
 + lock()
 + unlock()
 + unlockShortly()
-- startTimer()
-- resetTimer()
-- stopTimer()
 }
 
 LockedState --> States : name
@@ -184,39 +193,26 @@ UnlockedState --> States : name
 ProppedState --> States : name
 UnlockedShortlyState --> States : name
 
-interface TimedEvent {
-+ isExpired() : boolean
-+ notifyExpired()
+package "java.util" {
+    interface Observer {
+        +update(observable: Observable, arg: Object): void
+    }
+
+    class Observable {
+        -changed: boolean
+        -observers: List<Observer>
+        +addObserver(o: Observer): void
+        +deleteObserver(o: Observer): void
+        +notifyObservers(arg: Object): void
+        +notifyObservers(): void
+        +deleteObservers(): void
+        +setChanged(): void
+
+    }
 }
 
-class Clock implements TimedEvent {
-- endTime : Long
-- observerable : Observerable
-+ Clock(endTime : Long, observerable : Observerable)
-+ isExpired() : Boolean
-+ notifyExpired()
-+ reset(millis : Int)
-+ stop()
-+ cancel()
-}
+UnlockedShortlyState --> Clock : "getInstance()"
 
-Clock --> Observerable : "observerable"
-UnlockedShortlyState --> Clock : "clock"
-
-class Observer {
-- instance : Observer
-- timedEvents : TimedEvent[]
-- running : Boolean
-+ Observer()
-+ getInstance() : Observer
-+ addTimedEvent(timedEvent : TimedEvent)
-+ removeTimedEvent(timedEvent : TimedEvent)
-+ run()
-+ stop()
-}
-
-Observer --> Observer : "instance"
-Clock --> Observer : "getInstance()"
 
 static class DirectoryUserGroups {
 - {static} userGroups : UserGroup[]

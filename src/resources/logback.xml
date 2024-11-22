@@ -1,12 +1,21 @@
 <configuration>
     <!-- Appender para la consola -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <append>true</append> <!-- default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -
+                %msg%n</pattern>
+        </encoder>
+        <file>test.dat</file>
+    </appender>
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <appender name="FILE_HTML" class="ch.qos.logback.core.FileAppender">
         <!-- Nombre del archivo donde se guardarán los logs -->
         <file>test.html</file>
         <append>true</append> <!-- Añadir al archivo existente o sobrescribir -->
@@ -20,6 +29,11 @@
         </encoder>
     </appender>
 
+    <!--Logers fita 2 *para activar o desactivar poner level en DEBUG o OFF*-->
+    <logger name="base.Clock_f2" level="DEBUG" />
+    <logger name="base.doorstates.UnlockedShortlyStateF2" level="DEBUG"/>
+
+    <!-- Logers fit 1 *para activar o desactivar poner level en DEBUG o OFF*-->
     <logger name="base.Actions" level="DEBUG" />
     <logger name="base.Area" level="DEBUG" />
     <logger name="base.Clock" level="DEBUG" />
@@ -29,19 +43,17 @@
     <logger name="base.DirectoryUserGroups" level="DEBUG" />
     <logger name="base.Door" level="DEBUG" />
     <logger name="base.DoorState" level="DEBUG" />
-    <logger name="base.Main" level="OFF" />
-    <logger name="base.Observer" level="DEBUG" />
+    <logger name="base.Main" level="DEBUG" />
+    <!--<logger name="base.Observer" level="DEBUG" />-->
     <logger name="base.Partition" level="DEBUG" />
     <logger name="base.Schedule" level="DEBUG" />
     <logger name="base.Space" level="DEBUG" />
     <logger name="base.User" level="DEBUG" />
     <logger name="base.UserGroup" level="DEBUG" />
-
     <logger name="base.doorstates.LockedState" level="DEBUG" />
     <logger name="base.doorstates.ProppedState" level="DEBUG" />
     <logger name="base.doorstates.UnlockedShortlyState" level="DEBUG" />
     <logger name="base.doorstates.UnlockedState" level="DEBUG" />
-
     <logger name="base.requests.RequestArea" level="DEBUG" />
     <logger name="base.requests.RequestReader" level="DEBUG" />
     <logger name="base.requests.RequestRefresh" level="DEBUG" />
@@ -49,9 +61,10 @@
 
 
 
-    <!-- Configuración global -->
+    <!-- Configuración global *seleccionar y deseleccionar appenders dependiendo de que logs se quieren* -->
     <root level="DEBUG">
         <appender-ref ref="FILE" />
+        <appender-ref ref="FILE_HTML" />
         <appender-ref ref="CONSOLE" />
     </root>
 </configuration>
