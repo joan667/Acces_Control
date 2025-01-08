@@ -92,7 +92,7 @@ public class RequestArea implements Request {
    */
   public void process() {
     logger.info("Processing RequestArea with areaId: {} and action: {}", areaId, action);
-    Area area = DirectoryAreas.findAreaById(areaId);
+    Area area = DirectoryAreas.getInstance().findAreaById(areaId);
     if (area != null) {
       logger.debug("Found area with areaId: {}. Creating door requests.", areaId);
       for (Door door : area.getDoors()) {

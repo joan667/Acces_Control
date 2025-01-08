@@ -4,6 +4,7 @@ import base.requests.Request;
 import base.requests.RequestArea;
 import base.requests.RequestReader;
 import base.requests.RequestRefresh;
+import base.requests.RequestChildren;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -153,11 +154,7 @@ public class WebServer {
           request = makeRequestArea(tokens);
           break;
         case "get_children":
-          //TODO: this is to be implemented when programming the mobile app in Flutter
-          // in order to navigate the hierarchy of partitions, spaces and doors
-          assert false : "request get_children is not yet implemented";
-          request = null;
-          System.exit(-1);
+          request = makeRequestChildren(tokens);
           break;
         default:
           // just in case we change the user interface or the simulator
@@ -194,6 +191,11 @@ public class WebServer {
       // the remote resource..."
       answer += "\r\n"; // blank line between headers and content, very important !
       return answer;
+    }
+
+    private RequestChildren makeRequestChildren(String[] tokens) {
+      String areaId = tokens[1];
+      return new RequestChildren(areaId);
     }
 
     private String makeJsonAnswer(Request request) {

@@ -11,14 +11,29 @@ import org.slf4j.LoggerFactory;
 public final class DirectoryAreas {
 
   private static final Logger logger = LoggerFactory.getLogger("base.DirectoryAreas");
+  private static DirectoryAreas instance;
   private static Area rootArea;
   private static final ArrayList<Area> areas = new ArrayList<>();
   private static ArrayList<Door> doors = new ArrayList<>();
 
+  // Constructor privado para evitar instanciación externa
+  private DirectoryAreas() {}
+
+  /**
+   * Obtiene la instancia única de DirectoryAreas.
+   * @return La instancia única de DirectoryAreas.
+   */
+  public static synchronized DirectoryAreas getInstance() {
+    if (instance == null) {
+      instance = new DirectoryAreas();
+    }
+    return instance;
+  }
+
   /**
    * Initialize manually the areas and doors.
    */
-  public static void makeAreas() {
+  public void makeAreas() {
     logger.info("Initializing areas and doors...");
 
     try {
@@ -80,17 +95,23 @@ public final class DirectoryAreas {
 
   /**
    * Find an area by its id.
-   *
    * @param id The id of the area to find
    * @return The area with the given id
    * @throws IllegalArgumentException If the area is not found
    */
-  public static Area findAreaById(String id) {
+  public Area findAreaById(String id) {
     logger.debug("Searching for area with id: {}", id);
-    for (Area area : areas) {
-      if (area.getId().equals(id)) {
-        logger.info("Area found: {}", area);
-        return area;
+    if (id.equals("ROOT")) {
+      // Special id that means that the wanted area is the root.
+      // This is because the Flutter app client doesn't know the
+      // id of the root, differently from the simulator
+      return rootArea;
+    }else{
+      for (Area area : areas) {
+        if (area.getId().equals(id)) {
+          logger.info("Area found: {}", area);
+          return area;
+        }
       }
     }
     logger.warn("Area with id \"{}\" not found", id);
@@ -99,12 +120,11 @@ public final class DirectoryAreas {
 
   /**
    * Find a door by its id.
-   *
    * @param id The id of the door to find
    * @return The door with the given id
    * @throws IllegalArgumentException If the door is not found
    */
-  public static Door findDoorById(String id) {
+  public Door findDoorById(String id) {
     logger.debug("Searching for door with id: {}", id);
     for (Door door : doors) {
       if (door.getId().equals(id)) {
@@ -118,20 +138,18 @@ public final class DirectoryAreas {
 
   /**
    * Get the root area.
-   *
    * @return The root area
    */
-  public static Area getRootArea() {
+  public Area getRootArea() {
     logger.debug("Getting root area...");
     return rootArea;
   }
 
   /**
    * Get all the doors.
-   *
    * @return The list of all doors
    */
-  public static ArrayList<Door> getAllDoors() {
+  public ArrayList<Door> getAllDoors() {
     logger.debug("Getting all doors...");
     if (rootArea != null) {
       logger.info("Returning doors from root area: {}", rootArea.getId());
@@ -141,3 +159,4 @@ public final class DirectoryAreas {
     return doors;
   }
 }
+

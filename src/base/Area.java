@@ -3,6 +3,7 @@ package base;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.json.JSONObject;
 
 
 
@@ -24,6 +25,8 @@ public abstract class Area {
     this.id = id;
     logger.info("Area created successfully with id: {}", id);
   }
+
+  public abstract JSONObject toJson(int depth);
 
   /**
    * Create a new area with a name and the parent partitions.

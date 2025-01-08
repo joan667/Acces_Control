@@ -39,10 +39,10 @@ public final class DirectoryUserGroups {
         Actions.UNLOCK_SHORTLY
     );
     employees.addAreas(
-        DirectoryAreas.findAreaById("ground_floor"),
-        DirectoryAreas.findAreaById("floor1"),
-        DirectoryAreas.findAreaById("exterior"),
-        DirectoryAreas.findAreaById("stairs")
+        DirectoryAreas.getInstance().findAreaById("ground_floor"),
+        DirectoryAreas.getInstance().findAreaById("floor1"),
+        DirectoryAreas.getInstance().findAreaById("exterior"),
+        DirectoryAreas.getInstance().findAreaById("stairs")
     );
     users.add(new User("Ernest", "74984", employees));
     users.add(new User("Eulalia", "43295", employees));
@@ -70,7 +70,7 @@ public final class DirectoryUserGroups {
         Actions.UNLOCK
     );
     managers.addAreas(
-        DirectoryAreas.getRootArea()
+        DirectoryAreas.getInstance().getRootArea()
     );
     users.add(new User("Manel", "95783", managers));
     users.add(new User("Marta", "05827", managers));
@@ -96,7 +96,7 @@ public final class DirectoryUserGroups {
         Actions.LOCK,
         Actions.UNLOCK
     );
-    admin.addAreas(DirectoryAreas.getRootArea());
+    admin.addAreas(DirectoryAreas.getInstance().getRootArea());
     users.add(new User("Ana", "11343", admin));
     logger.info("Finished creating 'admin' user group.");
 

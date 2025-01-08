@@ -3,6 +3,8 @@ package base;
 import java.util.ArrayList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 
 /**
@@ -21,6 +23,22 @@ public class Partition extends Area {
   public Partition(String id) {
     super(id);
     logger.info("Partition created with id: {}", id);
+  }
+
+  public JSONObject toJson(int depth) {
+    // for depth=1 only the root and children,
+    // for recusive = all levels use Integer.MAX_VALUE
+    JSONObject json = new JSONObject();
+    json.put("class", "partition");
+    json.put("id", id);
+    JSONArray jsonAreas = new JSONArray();
+    if (depth > 0) {
+      for (Area a : areas) {
+        jsonAreas.put(a.toJson(depth - 1));
+      }
+      json.put("areas", jsonAreas);
+    }
+    return json;
   }
 
   /**

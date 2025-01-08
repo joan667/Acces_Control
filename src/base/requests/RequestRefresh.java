@@ -40,7 +40,7 @@ public class RequestRefresh implements Request {
   @Override
   public void process() {
     logger.info("Processing RequestRefresh to update simulator state.");
-    for (Door door : DirectoryAreas.getAllDoors()) {
+    for (Door door : DirectoryAreas.getInstance().getAllDoors()) {
       logger.debug("Adding door id: {} to JSON response.", door.getId());
       jsonsDoors.add(door.toJson());
     }

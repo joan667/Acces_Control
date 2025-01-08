@@ -23,7 +23,7 @@ public class Main {
 
     // Create areas
     logger.info("Initializing areas.");
-    DirectoryAreas.makeAreas();
+    DirectoryAreas.getInstance().makeAreas();
     logger.info("Areas initialized successfully.");
 
     // Create users

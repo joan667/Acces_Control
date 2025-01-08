@@ -131,7 +131,7 @@ public class RequestReader implements Request {
   public void process() {
     logger.info("Processing RequestReader for doorId: {} with action: {}", doorId, action);
     User user = DirectoryUserGroups.findUserByCredential(credential);
-    Door door = DirectoryAreas.findDoorById(doorId);
+    Door door = DirectoryAreas.getInstance().findDoorById(doorId);
 
     assert door != null : "door " + doorId + " not found";
 
